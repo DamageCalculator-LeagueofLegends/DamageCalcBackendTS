@@ -1,7 +1,7 @@
-import { Abilites } from './Abilites';
+import { StaticAbilities } from './abilities/StaticAbilities';
 import { AttributeRatings } from './AttributeRatings';
 import { Price } from './Price';
-import { Skin } from './Skin';
+import { Skin } from './Skin/Skin';
 import { Stats } from './Stats';
 
 export type Url = string;
@@ -19,7 +19,7 @@ export interface RawChampion {
   stats: Stats;
   roles: (keyof typeof Roles)[];
   attributeRatings: AttributeRatings;
-  abilities: Abilites;
+  abilities: StaticAbilities;
   releaseDate: string;
   releasePatch: string;
   patchLastChanged: string;
