@@ -20,6 +20,8 @@ export interface ItemStats {
   abilityHaste: ItemStatsInfo;
   omnivamp: ItemStatsInfo;
   tenacity: ItemStatsInfo;
+  slowResitance?: ItemStatsInfo
+  physicalVamp?: ItemStatsInfo
 }
 
 export interface ItemStatsInfo {
