@@ -27,7 +27,7 @@ export abstract class Item {
   setMythicStats(itemPassives: Passive[]) {
     if (itemPassives?.length) {
       for (const passive of itemPassives ) {
-        if (passive.mythic == true) {
+        if (passive.mythic === true) {
           this.mythicStats = passive.stats;
         }
       }
