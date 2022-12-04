@@ -11,7 +11,7 @@ export interface ItemStats {
   health: ItemStatsInfo;
   healthRegen: ItemStatsInfo;
   lethality: ItemStatsInfo;
-  lifesteal: ItemStatsInfo;
+  lifeSteal: ItemStatsInfo;
   magicPenetration: ItemStatsInfo;
   magicResistance: ItemStatsInfo;
   mana: ItemStatsInfo;
