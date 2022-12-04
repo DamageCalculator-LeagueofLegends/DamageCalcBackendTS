@@ -10,6 +10,8 @@ export abstract class Item {
 
   isLegendary: boolean;
   isMythic: boolean;
+  hasActive: boolean;
+  isUnique: boolean;
 
   itemStats: ItemStats;
   mythicStats: ItemStats;
@@ -26,7 +28,7 @@ export abstract class Item {
 
   setMythicStats(itemPassives: Passive[]) {
     if (itemPassives?.length) {
-      for (const passive of itemPassives ) {
+      for (const passive of itemPassives) {
         if (passive.mythic === true) {
           this.mythicStats = passive.stats;
         }
