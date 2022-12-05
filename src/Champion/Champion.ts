@@ -30,7 +30,7 @@ export abstract class Champion {
   // weil attackspeed cringe
   attackSpeedRatio: number;
 
-  // Linus wegen setter fragen
+
   champBasedOnLevelStats: BasedOnLevelStats;
   champBonusStats: BonusStats;
   champTotalStats: TotalStats;
@@ -130,4 +130,25 @@ export abstract class Champion {
     this.setTotalStats();
     this.updateStatsBasedOnSpecialItems();
   }
+
+  autoAttack(){
+
+  }
+
+  q_action(){
+
+  }
+
+  w_action(){
+
+  }
+
+  e_action(){
+
+  }
+
+  r_action(){
+
+  }
+  
 }
