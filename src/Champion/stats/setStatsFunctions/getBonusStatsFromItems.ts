@@ -25,30 +25,40 @@ export function getBonusStatsFromItems(
 
   if (items.length > 0) {
     for (const item of items) {
-      currStats.healthPoints += item.itemStats.health.flat;
-      currStats.mana += item.itemStats.mana.flat;
-      currStats.armor += item.itemStats.armor.flat;
-      currStats.magicResistance += item.itemStats.magicResistance.flat;
-      currStats.attackDamage += Array.isArray(item.itemStats.attackDamage)
-        ? item.itemStats.attackDamage[0]!.flat
-        : item.itemStats.attackDamage.flat;
-      currStats.attackSpeed += item.itemStats.attackSpeed.flat;
+      const {
+        health,
+        mana,
+        armor,
+        magicResistance,
+        attackDamage,
+        attackSpeed,
+      } = item.itemStats;
+      currStats.healthPoints += health.flat;
+      currStats.mana += mana.flat;
+      currStats.armor += armor.flat;
+      currStats.magicResistance += magicResistance.flat;
+      currStats.attackDamage += Array.isArray(attackDamage)
+        ? attackDamage[0]!.flat
+        : attackDamage.flat;
+      currStats.attackSpeed += attackSpeed.flat;
     }
 
     if (hasMythic) {
-      currStats.healthPoints +=
-        mythicItem.mythicStats.health.flat * numberOfLegendaryItems;
-      currStats.armor +=
-        mythicItem.mythicStats.armor.flat * numberOfLegendaryItems;
+      const {
+        health,
+        armor,
+        magicResistance,
+        attackDamage,
+        attackSpeed,
+      } = mythicItem.itemStats;
+      currStats.healthPoints += health.flat * numberOfLegendaryItems;
+      currStats.armor += armor.flat * numberOfLegendaryItems;
       currStats.magicResistance +=
-        mythicItem.mythicStats.magicResistance.flat * numberOfLegendaryItems;
-      currStats.attackDamage += Array.isArray(
-        mythicItem.mythicStats.attackDamage
-      )
-        ? mythicItem.mythicStats.attackDamage[0]!.flat * numberOfLegendaryItems
-        : mythicItem.mythicStats.attackDamage.flat * numberOfLegendaryItems;
-      currStats.attackSpeed +=
-        mythicItem.mythicStats.attackSpeed.flat * numberOfLegendaryItems;
+        magicResistance.flat * numberOfLegendaryItems;
+      currStats.attackDamage += Array.isArray(attackDamage)
+        ? attackDamage[0]!.flat * numberOfLegendaryItems
+        : attackDamage.flat * numberOfLegendaryItems;
+      currStats.attackSpeed += attackSpeed.flat * numberOfLegendaryItems;
     }
   }
   return currStats;
