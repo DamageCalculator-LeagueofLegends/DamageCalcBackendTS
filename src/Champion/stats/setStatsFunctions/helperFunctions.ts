@@ -6,21 +6,18 @@ export function multiplicativeCalc(
   itemStat: number
 ): number {
   if (itemStat !== 0) {
-    if (currentStat === 0) 
-      return 1 - itemStat / 100;
-    else 
-      return 1 - currentStat * (itemStat / 100);
-    
+    if (currentStat === 0) return 1 - itemStat / 100;
+    else return 1 - currentStat * (itemStat / 100);
   }
   return 0;
 }
 
 export function getNumberOfLegendaryItems(items: Item[]): number {
-  return items.filter(item => item.isLegendary).length;
+  return items.filter((item) => item.isLegendary).length;
 }
 
 export function checkForMythicItemAndGetMythicItem(items: Item[]): Item | null {
-  return items.find(item => item.isMythic) || null;
+  return items.find((item) => item.isMythic) || null;
 }
 
 export function setAttackSpeedBasedOnLevel(growth: number, level: number) {
@@ -31,7 +28,7 @@ export function setAttackSpeedBasedOnLevel(growth: number, level: number) {
 export function setAttackSpeed(base: number, ratio: number, bonus: number) {
   let total = base + ratio * (bonus / 100);
   // TODO: there is an excpetion for some champs and other conditions needs to implemented at some point lol
-  total = Math.min(total, 2.5)
+  total = Math.min(total, 2.5);
   return total;
 }
 
