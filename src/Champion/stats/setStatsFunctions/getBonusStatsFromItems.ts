@@ -44,13 +44,8 @@ export function getBonusStatsFromItems(
     }
 
     if (hasMythic) {
-      const {
-        health,
-        armor,
-        magicResistance,
-        attackDamage,
-        attackSpeed,
-      } = mythicItem.itemStats;
+      const { health, armor, magicResistance, attackDamage, attackSpeed } =
+        mythicItem.mythicStats;
       currStats.healthPoints += health.flat * numberOfLegendaryItems;
       currStats.armor += armor.flat * numberOfLegendaryItems;
       currStats.magicResistance +=
