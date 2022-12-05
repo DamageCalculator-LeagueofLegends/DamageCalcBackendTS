@@ -54,7 +54,7 @@ function calculateAmplifierBasedOnMissingHealth(
   let missingHealthIterator: number = missingHealthData.perPercentage;
   for (
     let i = 0;
-    i >= Math.round(missingHealthData.cappedAt / missingHealthIterator);
+    i <= Math.round(missingHealthData.cappedAt / missingHealthIterator);
     i++
   ) {
     if (missingHealth < missingHealthData.perPercentage) {
