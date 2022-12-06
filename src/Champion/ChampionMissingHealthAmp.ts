@@ -1,5 +1,5 @@
 export interface ChampionMissingHealthAmp {
   damageAmplifier: number;
-  pePercentage: number;
+  perPercentage: number;
   cappedAt: number;
 }
