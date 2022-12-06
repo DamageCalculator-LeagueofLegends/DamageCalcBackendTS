@@ -6,4 +6,6 @@ export interface StaticAbilities {
   W: AbilityStaticData[];
   E: AbilityStaticData[];
   R: AbilityStaticData[];
+
+  [key: string]: AbilityStaticData[];
 }
