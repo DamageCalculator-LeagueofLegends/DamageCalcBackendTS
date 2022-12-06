@@ -1,14 +1,3 @@
-export interface AbilityDynamicData {
-  bounds: Bounds;
-  actionConditions: ActionConditions;
-  skillLevel: number;
-}
-
-export interface Bounds {
-  lower: number;
-  upper: number;
-}
-
 export interface ActionConditions {
   firstCondition: Condition[];
 }

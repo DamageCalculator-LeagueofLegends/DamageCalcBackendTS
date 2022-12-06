@@ -7,8 +7,6 @@ import { ScalingValuesForChampAbilities } from './ScalingValuesForChampAbilities
 import { UtilInfo } from './UtilInfo';
 import { BonusStats } from './stats/BonusStats';
 import { TotalStats } from './stats/TotalStats';
-import { StaticAbilities } from '../RawChampion/abilities/StaticAbilities';
-import { AbilityDynamicData } from './AbilityDynamicData';
 import { getBonusStatsFromItems } from './stats/setStatsFunctions/getBonusStatsFromItems';
 import { getStatBasedOnLevel } from './stats/setStatsFunctions/getStatBasedOnLevel';
 import { getTotalStatsBasedOnSpeicalItemEffects } from './stats/setStatsFunctions/getTotalStatsBasedOnSpeicalItemEffects';
@@ -18,6 +16,9 @@ import {
   setAttackSpeed,
   setAttackSpeedBasedOnLevel,
 } from './stats/setStatsFunctions/helperFunctions';
+import { ChampionAbilities } from '../Ability/ChampionAbilities';
+import { Ability } from '../Ability/Ability';
+import { BoundsList } from '../Ability/dynamicAbilityData/Bounds';
 
 export abstract class Champion {
   rawChampData: RawChampion;
@@ -30,7 +31,6 @@ export abstract class Champion {
   // weil attackspeed cringe
   attackSpeedRatio: number;
 
-
   champBasedOnLevelStats: BasedOnLevelStats;
   champBonusStats: BonusStats;
   champTotalStats: TotalStats;
@@ -40,9 +40,9 @@ export abstract class Champion {
   champUtilInfo: UtilInfo;
   champMissingHealthAmpInfo: ChampionMissingHealthAmp;
 
-  champStaticAbilityData: StaticAbilities;
-  champDynmicAbilityData: AbilityDynamicData;
+  private _champBounds: BoundsList;
   champScalingValues: ScalingValuesForChampAbilities;
+  champAbilities: ChampionAbilities;
 
   constructor(rawChampData: RawChampion) {
     this.rawChampData = rawChampData;
@@ -50,44 +50,81 @@ export abstract class Champion {
     this.champName = rawChampData.name;
     this.champIcon = rawChampData.icon;
     this.attackSpeedRatio = rawChampData.stats.attackSpeedRatio.flat;
-    this.champStaticAbilityData = rawChampData.abilities;
+    this.champAbilities = {
+      Q: this.getStaticAbilityData('Q'),
+      W: this.getStaticAbilityData('W'),
+      E: this.getStaticAbilityData('E'),
+      R: this.getStaticAbilityData('R'),
+    };
+    this.champBounds = {
+      Q: { lower: 0, upper: 4 },
+      W: { lower: 0, upper: 4 },
+      E: { lower: 0, upper: 4 },
+      R: { lower: 0, upper: 2 },
+    };
+  }
+
+  set champBounds(bounds: BoundsList) {
+    const { champAbilities } = this;
+    for (const ability in champAbilities) {
+      champAbilities[ability]!.dynamicData.bounds = bounds[ability];
+    }
+
+    this._champBounds = bounds;
+  }
+
+  get champBounds() {
+    return this._champBounds;
+  }
+
+  getStaticAbilityData(key: string): Ability {
+    let ability: Ability = new Ability();
+    const staticAbilityData = this.rawChampData.abilities[key];
+
+    if (staticAbilityData) {
+      ability.staticData = staticAbilityData;
+    }
+    return ability;
   }
 
   setChampBasedOnLevelStats(baseStats: Stats) {
-    let stats: BasedOnLevelStats = {
-      healthPoints: getStatBasedOnLevel(baseStats.health, this.champLevel),
-      healthPointsRegen: getStatBasedOnLevel(
-        baseStats.healthRegen,
-        this.champLevel
-      ),
-      mana: getStatBasedOnLevel(baseStats.mana, this.champLevel),
-      manaRegen: getStatBasedOnLevel(baseStats.manaRegen, this.champLevel),
-      armor: getStatBasedOnLevel(baseStats.armor, this.champLevel),
-      magicResistance: getStatBasedOnLevel(
-        baseStats.magicResistance,
-        this.champLevel
-      ),
-      attackDamage: getStatBasedOnLevel(
-        baseStats.attackDamage,
-        this.champLevel
-      ),
+    const {
+      health,
+      healthRegen,
+      mana,
+      manaRegen,
+      armor,
+      magicResistance,
+      attackDamage,
+      attackSpeed,
+    } = baseStats;
+
+    const { champLevel, champUtilInfo, champBonusStats } = this;
+
+    const stats: BasedOnLevelStats = {
+      healthPoints: getStatBasedOnLevel(health, champLevel),
+      healthPointsRegen: getStatBasedOnLevel(healthRegen, champLevel),
+      mana: getStatBasedOnLevel(mana, champLevel),
+      manaRegen: getStatBasedOnLevel(manaRegen, champLevel),
+      armor: getStatBasedOnLevel(armor, champLevel),
+      magicResistance: getStatBasedOnLevel(magicResistance, champLevel),
+      attackDamage: getStatBasedOnLevel(attackDamage, champLevel),
     };
-    this.champUtilInfo.baseHealthRegen = baseStats.healthRegen.flat;
-    this.champUtilInfo.baseManaRegen = baseStats.manaRegen.flat;
-    this.champBonusStats.attackSpeed = setAttackSpeedBasedOnLevel(
-      baseStats.attackSpeed.perLevel,
-      this.champLevel
+
+    champUtilInfo.baseHealthRegen = healthRegen.flat;
+    champUtilInfo.baseManaRegen = manaRegen.flat;
+    champBonusStats.attackSpeed = setAttackSpeedBasedOnLevel(
+      attackSpeed.perLevel,
+      champLevel
     );
     this.champBasedOnLevelStats = stats;
   }
 
   setChampBonusStats() {
-    // TODO items still need to be implemented and not be a string
-    let stats = getBonusStatsFromItems(
+    this.champBonusStats = getBonusStatsFromItems(
       this.champItems,
       this.champBonusStats.attackSpeed
     );
-    this.champBonusStats = stats;
   }
 
   setTotalStats() {
@@ -131,24 +168,13 @@ export abstract class Champion {
     this.updateStatsBasedOnSpecialItems();
   }
 
-  autoAttack(){
+  autoAttack() {}
 
-  }
+  q_action() {}
 
-  q_action(){
+  w_action() {}
 
-  }
+  e_action() {}
 
-  w_action(){
-
-  }
-
-  e_action(){
-
-  }
-
-  r_action(){
-
-  }
-  
+  r_action() {}
 }
