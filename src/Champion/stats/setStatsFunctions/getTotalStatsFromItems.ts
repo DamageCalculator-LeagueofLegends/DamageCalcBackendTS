@@ -7,8 +7,8 @@ import {
   multiplicativeCalc,
   updateMultiplicativeStats,
 } from './helperFunctions';
-import { totalStatsFromItems as totalStatsFromItem } from './utilityFuncstions/totalStatsFromItems';
-import { totalStatsFromMythic } from './utilityFuncstions/totalStatsFromMythic';
+import { totalStatsFromItems as totalStatsFromItem } from './utilityFunctions/totalStatsFromItems';
+import { totalStatsFromMythic } from './utilityFunctions/totalStatsFromMythic';
 
 export function getTotalStatsFromItems(
   items: Item[],
