@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2015", "dom"],
+    "lib": ["es2015"],
     "noImplicitAny": true,
     "alwaysStrict": true,
     "noImplicitOverride": true,
@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
-    "baseUrl": "/src"
+    "baseUrl": "/src",
+    "target": "es5"
   }
 }
