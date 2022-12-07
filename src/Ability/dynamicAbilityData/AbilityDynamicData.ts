@@ -10,4 +10,3 @@ export interface AbilityDynamicData {
   attributeIndicies: AbilityAtributeIndicies;
   scalingValues: ScalingValuesForChampAbilities;
 }
-

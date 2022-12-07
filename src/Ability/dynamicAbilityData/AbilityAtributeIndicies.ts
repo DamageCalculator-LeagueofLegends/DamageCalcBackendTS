@@ -1,8 +1,7 @@
-
 export interface AbilityAtributeIndicies {
-    ability: number;
-    effect: number;
-    leveling: number;
-    modifier: number;
-    value: number;
+  ability: number;
+  effect: number;
+  leveling: number;
+  modifier: number;
+  value: number;
 }
