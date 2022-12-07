@@ -31,6 +31,7 @@ export enum Affect {
   'Enemies',
   'Allies',
   'Enemies / Self',
+  'Enemies / Self, Allies',
   'Enemies, Self',
   'Self / Enemies',
   'Self, Enemies',
