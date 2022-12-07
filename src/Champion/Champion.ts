@@ -198,11 +198,11 @@ export abstract class Champion {
 
   passiveAction(){}
 
-  q_action() {}
+  qAction() {}
 
-  w_action() {}
+  wAction() {}
 
-  e_action() {}
+  eAction() {}
 
-  r_action() {}
+  rAction() {}
 }
