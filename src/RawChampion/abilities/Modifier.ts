@@ -35,4 +35,5 @@ export enum Unit {
   "% (+ 2.5% per 100 AP) of target's maximum health",
   "%  of target's missing health",
   "% (+ 0.25% per 100 AP) of target's maximum health",
+  '   per 4% critical strike chance',
 }
