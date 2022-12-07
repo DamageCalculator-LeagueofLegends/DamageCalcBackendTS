@@ -9,7 +9,7 @@ export class Ability {
   staticData: AbilityStaticData[];
   dynamicData: AbilityDynamicData;
 
-  constructor() { }
+  constructor() {}
   updateDynamicData(updatedDynamicData: AbilityDynamicData) {
     const {
       bounds,
@@ -79,6 +79,9 @@ export class Ability {
     const currAbilty = this.staticData[ability];
     return currAbilty?.effects[effect]?.leveling[leveling]?.modifiers!;
   }
+
+  checkIfInsideBounds(): boolean {
+    const { bounds, skillLevel } = this.dynamicData;
+    return bounds!.lower <= skillLevel && skillLevel < bounds!.upper;
+  }
 }
-
-
