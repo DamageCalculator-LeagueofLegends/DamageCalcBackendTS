@@ -39,11 +39,15 @@ export class Ability {
     return damage;
   }
 
-  getDamageBasedOnEnemyMissingHealth(attributeIndicies: AbilityAtributeIndicies, missingHealthData: MissingHealthCalculation){
-    const damage = this.getDamage(attributeIndicies)
-    let increasedDamage = damage.value + (damage.value * missingHealthData.damageAmplifier)
-    damage.value = increasedDamage
-    return damage
+  getDamageBasedOnEnemyMissingHealth(
+    attributeIndicies: AbilityAtributeIndicies,
+    missingHealthData: MissingHealthCalculation
+  ) {
+    const damage = this.getDamage(attributeIndicies);
+    let increasedDamage =
+      damage.value + damage.value * missingHealthData.damageAmplifier;
+    damage.value = increasedDamage;
+    return damage;
   }
 
   calcDamage(): number {
