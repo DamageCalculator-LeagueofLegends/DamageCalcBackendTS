@@ -196,6 +196,8 @@ export abstract class Champion {
     return new Damage(DamageType.PHYSICAL_DAMAGE, this.champTotalStats.attackDamage)
   }
 
+  passiveAction(){}
+
   q_action() {}
 
   w_action() {}
