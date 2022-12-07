@@ -1,8 +1,8 @@
 export enum DamageType {
-  'PHYSICAL_DAMAGE',
-  'TRUE_DAMAGE',
-  'MAGIC_DAMAGE',
-  'MIXED_DAMAGE',
+  'PHYSICAL_DAMAGE' = 'PHYSICAL_DAMAGE',
+  'TRUE_DAMAGE' = 'TRUE_DAMAGE',
+  'MAGIC_DAMAGE' = 'MAGIC_DAMAGE',
+  'MIXED_DAMAGE' = 'MIXED_DAMAGE',
 }
 
 export enum Targeting {
