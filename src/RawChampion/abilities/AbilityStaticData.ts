@@ -23,7 +23,7 @@ export interface AbilityStaticData {
   affects?: keyof typeof Affect | null;
   spellshieldable?: keyof typeof Spellshieldable | null;
   resource?: keyof typeof Resource | null;
-  damageType?: keyof typeof DamageType | null;
+  damageType: keyof typeof DamageType | null;
   spellEffects?: keyof typeof SpellEffects | null;
   projectile?: keyof typeof Projectile | null;
   onHitEffects?: keyof typeof OnHitEffects | null;
