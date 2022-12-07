@@ -1,4 +1,5 @@
 import { Damage } from '../Damage/Damage';
+import { MissingHealthCalculation } from '../Damage/MissingHealthCalculation';
 import { AbilityStaticData } from '../RawChampion/abilities/AbilityStaticData';
 import { Modifier } from '../RawChampion/abilities/Modifier';
 import { AbilityAtributeIndicies } from './dynamicAbilityData/AbilityAtributeIndicies';
@@ -36,6 +37,13 @@ export class Ability {
     const damage = new Damage(damageType, this.calcDamage());
 
     return damage;
+  }
+
+  getDamageBasedOnEnemyMissingHealth(attributeIndicies: AbilityAtributeIndicies, missingHealthData: MissingHealthCalculation){
+    const damage = this.getDamage(attributeIndicies)
+    let increasedDamage = damage.value + (damage.value * missingHealthData.damageAmplifier)
+    damage.value = increasedDamage
+    return damage
   }
 
   calcDamage(): number {
