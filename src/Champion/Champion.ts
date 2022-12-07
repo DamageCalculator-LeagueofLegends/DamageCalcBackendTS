@@ -192,20 +192,30 @@ export abstract class Champion {
     this.champAbilities.R.dynamicData = dynamicData;
   }
 
-  autoAttack(): Damage | null {
+  autoAttack(): Damage | Damage[] | null {
     return new Damage(
       DamageType.PHYSICAL_DAMAGE,
       this.champTotalStats.attackDamage
     );
   }
 
-  passiveAction(): Damage | null {return null}
+  passiveAction(): Damage | Damage[] | null {
+    return null;
+  }
 
-  qAction(): Damage | null {return null}
+  qAction(): Damage | Damage[] | null {
+    return null;
+  }
 
-  wAction(): Damage | null {return null}
+  wAction(): Damage | Damage[] | null {
+    return null;
+  }
 
-  eAction(): Damage | null {return null}
+  eAction(): Damage | Damage[] | null {
+    return null;
+  }
 
-  rAction(): Damage | null {return null}
+  rAction(): Damage | Damage[] | null {
+    return null;
+  }
 }
