@@ -19,6 +19,9 @@ import {
 import { ChampionAbilities } from '../Ability/ChampionAbilities';
 import { Ability } from '../Ability/Ability';
 import { BoundsList } from '../Ability/dynamicAbilityData/Bounds';
+import { AbilityDynamicData } from '../Ability/dynamicAbilityData/AbilityDynamicData';
+import { Damage } from '../Damage/Damage';
+import { DamageType } from '../RawChampion/abilities/staticDataEnums';
 
 export abstract class Champion {
   rawChampData: RawChampion;
@@ -62,6 +65,7 @@ export abstract class Champion {
       E: { lower: 0, upper: 4 },
       R: { lower: 0, upper: 2 },
     };
+    this.configureChampionStatsBasedOnLevelAndItems()
   }
 
   set champBounds(bounds: BoundsList) {
@@ -166,9 +170,31 @@ export abstract class Champion {
     this.setChampBonusStats();
     this.setTotalStats();
     this.updateStatsBasedOnSpecialItems();
+    this.setChampScalingValues();
   }
 
-  autoAttack() {}
+  setChampScalingValues() {
+    const {attackDamage, abilityPower} = this.champTotalStats
+    this.champScalingValues.AD = attackDamage
+    this.champScalingValues.AP = abilityPower
+    this.champScalingValues['bonus AD'] = this.champBonusStats.attackSpeed
+
+    this.champAbilities.Q.dynamicData.scalingValues = this.champScalingValues
+    this.champAbilities.W.dynamicData.scalingValues = this.champScalingValues
+    this.champAbilities.E.dynamicData.scalingValues = this.champScalingValues
+    this.champAbilities.R.dynamicData.scalingValues = this.champScalingValues
+  }
+
+  setDynamicAbilityData(dynamicData: AbilityDynamicData) {
+    this.champAbilities.Q.dynamicData = dynamicData
+    this.champAbilities.W.dynamicData = dynamicData
+    this.champAbilities.E.dynamicData = dynamicData
+    this.champAbilities.R.dynamicData = dynamicData
+  }
+
+  autoAttack() {
+    return new Damage(DamageType.PHYSICAL_DAMAGE, this.champTotalStats.attackDamage)
+  }
 
   q_action() {}
 
