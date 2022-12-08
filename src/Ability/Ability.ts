@@ -26,7 +26,13 @@ export class Ability {
     this.dynamicData.scalingValues = scalingValues;
   }
 
-  getDamage(attributeIndicies: AbilityAtributeIndicies): Damage {
+  getDamage(
+    attributeIndicies: AbilityAtributeIndicies = {
+      ability: 0,
+      effect: 0,
+      leveling: 0,
+    }
+  ): Damage {
     const updatedDynamicData: AbilityDynamicData = {
       ...this.dynamicData,
       attributeIndicies: attributeIndicies,
@@ -40,8 +46,12 @@ export class Ability {
   }
 
   getDamageBasedOnEnemyMissingHealth(
-    attributeIndicies: AbilityAtributeIndicies,
-    missingHealthData: MissingHealthCalculation
+    missingHealthData: MissingHealthCalculation,
+    attributeIndicies: AbilityAtributeIndicies = {
+      ability: 0,
+      effect: 0,
+      leveling: 0,
+    }
   ) {
     const damage = this.getDamage(attributeIndicies);
     let increasedDamage =
