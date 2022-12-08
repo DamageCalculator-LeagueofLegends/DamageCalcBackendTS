@@ -1,6 +1,4 @@
-import { setFlagsFromString } from 'v8';
 import { Ability } from '../Ability/Ability';
-import { AbilityAtributeIndicies } from '../Ability/dynamicAbilityData/AbilityAtributeIndicies';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
 import { MissingHealthCalculation } from '../Damage/MissingHealthCalculation';
