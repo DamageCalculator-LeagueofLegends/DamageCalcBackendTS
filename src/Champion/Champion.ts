@@ -177,7 +177,7 @@ export abstract class Champion {
     const { attackDamage, abilityPower } = this.champTotalStats;
     this.champScalingValues.AD = attackDamage;
     this.champScalingValues.AP = abilityPower;
-    this.champScalingValues['bonus AD'] = this.champBonusStats.attackSpeed;
+    this.champScalingValues['bonus AD'] = this.champBonusStats.attackDamage;
 
     this.champAbilities.Q.dynamicData.scalingValues = this.champScalingValues;
     this.champAbilities.W.dynamicData.scalingValues = this.champScalingValues;
@@ -217,5 +217,11 @@ export abstract class Champion {
 
   rAction(): Damage | Damage[] | null {
     return null;
+  }
+
+  updateTotalBonusAndScalingValues(value: number, statName: string) {
+    this.champBonusStats[statName] += value;
+    this.champTotalStats[statName] += value;
+    this.setChampScalingValues();
   }
 }
