@@ -1,5 +1,5 @@
 export interface ActionConditions {
-  firstCondition: Condition[];
+  conditions: Condition[];
 }
 
 export type Condition =
@@ -13,9 +13,25 @@ export type Condition =
     };
 
 export enum AllConditions {
-  'isSweetSpot', // Aatrox
-  'numberOfAttribute', // Aatrox
-  'numberOfUsages', // Ahri
-  'firstInstance', // Ahri, Akali
-  'secondInstance', // Ahri, Akali
+  'isSweetSpot' = 'isSweetSpot', // Aatrox
+  'numberOfAttribute' = 'numberOfAttribute', // Aatrox
+  'tetherCompleted' = 'tetherCompleted', // Aatrox
+  'numberOfUsages' = 'numberOfUsages', // Ahri
+  'firstInstance' = 'firstInstance', // Ahri, Akali
+  'secondInstance' = 'secondInstance', // Ahri, Akali
+}
+
+export function checkCondition(
+  listOfConditions: Condition[],
+  conditionToCheckWith: AllConditions
+): checkedConditions {
+  for (const index in listOfConditions)
+    if (listOfConditions[index]!.type === conditionToCheckWith)
+      return { hasCondition: false, index: parseInt(index) };
+  return { hasCondition: false };
+}
+
+export interface checkedConditions {
+  hasCondition: boolean;
+  index?: number;
 }
