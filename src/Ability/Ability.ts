@@ -102,6 +102,10 @@ export class Ability {
     return currAbilty?.effects[effect]?.leveling[leveling]?.modifiers!;
   }
 
+  setAttributeIndicies(indicies: AbilityAtributeIndicies) {
+    this.dynamicData.attributeIndicies = indicies;
+  }
+
   checkIfInsideBounds(): boolean {
     const { bounds, skillLevel } = this.dynamicData;
     return bounds!.lower <= skillLevel && skillLevel < bounds!.upper;
