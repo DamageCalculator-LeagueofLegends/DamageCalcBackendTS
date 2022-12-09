@@ -5,4 +5,6 @@ export interface BonusStats {
   magicResistance: number;
   attackDamage: number;
   attackSpeed: number;
+
+  [key: string]: number;
 }

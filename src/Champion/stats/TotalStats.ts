@@ -24,4 +24,6 @@ export interface TotalStats {
   magicPenPercentage: number;
   tenacity: number;
   slowResistance: number;
+
+  [key: string]: number;
 }
