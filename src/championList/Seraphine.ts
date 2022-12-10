@@ -22,7 +22,7 @@ export class Seraphine extends Champion {
     this.noteStacks++;
   }
 
-  override autoAttack(): Damage[]  {
+  override autoAttack(): Damage[] {
     const autoAttackDamage = new Damage(
       DamageType.PHYSICAL_DAMAGE,
       this.champTotalStats.attackDamage

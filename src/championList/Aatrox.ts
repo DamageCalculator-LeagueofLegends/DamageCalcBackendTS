@@ -13,7 +13,7 @@ export class Aatrox extends Champion {
   constructor(rawChampion: RawChampion) {
     super(rawChampion);
   }
-  override autoAttack():  Damage[]  {
+  override autoAttack(): Damage[] {
     const autoAttackDamage = new Damage(
       DamageType.PHYSICAL_DAMAGE,
       this.champTotalStats.attackDamage
@@ -55,7 +55,7 @@ export class Aatrox extends Champion {
     return [];
   }
 
-  override wAction(): Damage[]  {
+  override wAction(): Damage[] {
     const w = this.champAbilities.W;
     const { conditions: conditions } = w.dynamicData.actionConditions;
     if (w.checkIfInsideBounds()) {

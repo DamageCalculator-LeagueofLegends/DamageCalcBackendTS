@@ -193,10 +193,9 @@ export abstract class Champion {
   }
 
   autoAttack(): Damage[] {
-    return [new Damage(
-      DamageType.PHYSICAL_DAMAGE,
-      this.champTotalStats.attackDamage
-    )];
+    return [
+      new Damage(DamageType.PHYSICAL_DAMAGE, this.champTotalStats.attackDamage),
+    ];
   }
 
   passiveAction(): Damage[] {
