@@ -42,6 +42,11 @@ export class Akali extends Champion {
   }
 
   override qAction(): Damage[] {
+    const q = this.champAbilities.Q
+    if (q.checkIfInsideBounds()) {
+      this.hasAssissinsMark = true
+      return[q.getDamage()]
+    }
     return [];
   }
 
