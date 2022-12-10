@@ -1,6 +1,7 @@
 import {
   AllConditions,
   checkCondition,
+  checkIfConditonExists,
 } from '../Ability/dynamicAbilityData/ActionConditions';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
@@ -44,15 +45,10 @@ export class Aatrox extends Champion {
         conditions,
         AllConditions.isSweetSpot
       );
-      const { hasCondition, index } = attributeCondition;
       for (let i = 0; i < 3; i++) {
-        if (hasCondition === true)
-          if (conditions[index!]!.value === i)
-            if (
-              sweetSportCondition.hasCondition === true &&
-              conditions[sweetSportCondition.index!]?.value === true
-            )
-              return q.getDamage({ ability: 0, effect: i + 2, leveling: 1 });
+        if (checkIfConditonExists(attributeCondition, conditions, i))
+          if (checkIfConditonExists(sweetSportCondition, conditions, true))
+            return q.getDamage({ ability: 0, effect: i + 2, leveling: 1 });
         return q.getDamage({ ability: 0, effect: i + 2, leveling: 0 });
       }
     }
@@ -67,8 +63,7 @@ export class Aatrox extends Champion {
         conditions,
         AllConditions.tetherCompleted
       );
-      const { hasCondition, index } = tetherCondition;
-      if (hasCondition === true && conditions[index!]?.value === true)
+      if (checkIfConditonExists(tetherCondition, conditions, true))
         return w.getDamage({ ability: 0, effect: 2, leveling: 0 });
       return w.getDamage();
     }
