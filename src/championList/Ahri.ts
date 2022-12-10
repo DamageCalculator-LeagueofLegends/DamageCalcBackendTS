@@ -64,6 +64,17 @@ export class Ahri extends Champion {
   }
 
   override rAction(): Damage[] {
-    return [];
+    const r = this.champAbilities.R
+    const {conditions} = r.dynamicData.actionConditions
+    const listOfRDamages: Damage[] = []
+    if (r.checkIfInsideBounds()){
+      const damage = r.getDamage()
+      const amountOfR = checkCondition(conditions, AC.numberOfUsages)
+      if (amountOfR.hasCondition == true)
+         for (let i = 0; i <= conditions[amountOfR.index!]?.value!; i++){
+          listOfRDamages.push(damage)
+         }
+    }
+    return listOfRDamages;
   }
 }
