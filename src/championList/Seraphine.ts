@@ -6,16 +6,14 @@ import { DamageType } from '../RawChampion/abilities/staticDataEnums';
 import { RawChampion } from '../RawChampion/RawChampion';
 
 export class Seraphine extends Champion {
-  noteStacks: number;
-  echo: number;
+  noteStacks = 0;
+  echo = 0;
 
   constructor(rawChampion: RawChampion) {
     super(rawChampion);
     this.champMissingHealthAmpInfo.damageAmplifier = 0.05;
     this.champMissingHealthAmpInfo.perPercentage = 0.075;
     this.champMissingHealthAmpInfo.cappedAt = 0.75;
-    this.noteStacks = 0;
-    this.echo = 0;
   }
 
   increaseNoteStacks() {
