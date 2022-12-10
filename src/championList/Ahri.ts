@@ -1,6 +1,7 @@
 import {
-  AllConditions,
+  AllConditions as AC,
   checkCondition,
+  checkIfConditonExists,
 } from '../Ability/dynamicAbilityData/ActionConditions';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
@@ -24,36 +25,34 @@ export class Ahri extends Champion {
         DamageType.TRUE_DAMAGE,
         q.getDamage().value
       );
-      const hasFirstPass = checkCondition(
-        conditions,
-        AllConditions.firstInstance
-      );
-      const hasSecondPass = checkCondition(
-        conditions,
-        AllConditions.secondInstance
-      );
+      const hasFirstPass = checkCondition(conditions, AC.firstInstance);
+      const hasSecondPass = checkCondition(conditions, AC.secondInstance);
       if (
-        hasFirstPass.hasCondition === true &&
-        conditions[hasFirstPass.index!]?.value === true &&
-        hasSecondPass.hasCondition === true &&
-        conditions[hasSecondPass.index!]?.value === true
+        checkIfConditonExists(hasFirstPass, conditions, true) &&
+        checkIfConditonExists(hasSecondPass, conditions, true)
       )
         return [firstPassDamage, secondPassDamage];
-      else if (
-        hasFirstPass.hasCondition === true &&
-        conditions[hasFirstPass.index!]?.value === true
-      )
+      else if (checkIfConditonExists(hasFirstPass, conditions, true))
         return firstPassDamage;
-      else if (
-        hasSecondPass.hasCondition === true &&
-        conditions[hasSecondPass.index!]?.value === true
-      )
+      else if (checkIfConditonExists(hasSecondPass, conditions, true))
         return secondPassDamage;
     }
     return null;
   }
 
   override wAction(): Damage | Damage[] | null {
+    const w = this.champAbilities.W;
+    const { conditions } = w.dynamicData.actionConditions;
+    if (w.checkIfInsideBounds()) {
+      const firstHit = w.getDamage({ ability: 0, effect: 1, leveling: 0 });
+      const subsequentHit = w.getDamage({ ability: 0, effect: 2, leveling: 0 });
+      const amountHit = checkCondition(conditions, AC.numberOfUsages);
+      if (checkIfConditonExists(amountHit, conditions, 1)) return firstHit;
+      else if (checkIfConditonExists(amountHit, conditions, 2))
+        return [firstHit, subsequentHit];
+      else if (checkIfConditonExists(amountHit, conditions, 3))
+        return [firstHit, subsequentHit, subsequentHit];
+    }
     return null;
   }
 
