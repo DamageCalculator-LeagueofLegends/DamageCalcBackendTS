@@ -1,3 +1,8 @@
+import {
+  AllConditions as AC,
+  checkCondition,
+  checkIfConditonExists,
+} from '../Ability/dynamicAbilityData/ActionConditions';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
 import { DamageType } from '../RawChampion/abilities/staticDataEnums';
@@ -42,10 +47,10 @@ export class Akali extends Champion {
   }
 
   override qAction(): Damage[] {
-    const q = this.champAbilities.Q
+    const q = this.champAbilities.Q;
     if (q.checkIfInsideBounds()) {
-      this.hasAssissinsMark = true
-      return[q.getDamage()]
+      this.hasAssissinsMark = true;
+      return [q.getDamage()];
     }
     return [];
   }
@@ -55,6 +60,18 @@ export class Akali extends Champion {
   }
 
   override eAction(): Damage[] {
+    const e = this.champAbilities.E;
+    const { conditions } = e.dynamicData.actionConditions;
+    if (e.checkIfInsideBounds()) {
+      const firstInstance = checkCondition(conditions, AC.firstInstance);
+      const secondInstance = checkCondition(conditions, AC.secondInstance);
+      //technically works for both instances not implemented yet
+      this.hasAssissinsMark = true;
+      if (checkIfConditonExists(secondInstance, conditions, true)) {
+        return [e.getDamage({ ability: 0, effect: 2, leveling: 1 })];
+      }
+      return [e.getDamage()];
+    }
     return [];
   }
 
