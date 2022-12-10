@@ -5,6 +5,7 @@ import {
 } from '../Ability/dynamicAbilityData/ActionConditions';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
+import { MissingHealthCalculation } from '../Damage/MissingHealthCalculation';
 import { DamageType } from '../RawChampion/abilities/staticDataEnums';
 import { RawChampion } from '../RawChampion/RawChampion';
 
@@ -12,6 +13,9 @@ export class Akali extends Champion {
   hasAssissinsMark = false;
   constructor(rawChampion: RawChampion) {
     super(rawChampion);
+    this.champMissingHealthAmpInfo.damageAmplifier = 0.0286;
+    this.champMissingHealthAmpInfo.perPercentage = 0.01;
+    this.champMissingHealthAmpInfo.cappedAt = 0.7;
   }
 
   override autoAttack(): Damage[] {
@@ -65,7 +69,7 @@ export class Akali extends Champion {
     if (e.checkIfInsideBounds()) {
       const firstInstance = checkCondition(conditions, AC.firstInstance);
       const secondInstance = checkCondition(conditions, AC.secondInstance);
-      //technically works for both instances not implemented yet
+      // technically works for both instances not implemented yet
       this.hasAssissinsMark = true;
       if (checkIfConditonExists(secondInstance, conditions, true)) {
         return [e.getDamage({ ability: 0, effect: 2, leveling: 1 })];
@@ -76,6 +80,42 @@ export class Akali extends Champion {
   }
 
   override rAction(): Damage[] {
+    const r = this.champAbilities.R;
+    const { conditions } = r.dynamicData.actionConditions;
+    const { enemyCurrentHealth, enemyMaxHealth } = this.champUtilInfo;
+    if (r.checkIfInsideBounds()) {
+      // technically works for both instances not implemented yet
+      this.hasAssissinsMark = true;
+      const missingHealth = new MissingHealthCalculation(
+        enemyMaxHealth,
+        enemyCurrentHealth,
+        this.champMissingHealthAmpInfo
+      );
+      const firstInstance = checkCondition(conditions, AC.firstInstance);
+      const secondInstance = checkCondition(conditions, AC.secondInstance);
+      const firstRDamage = r.getDamage();
+      if (
+        checkIfConditonExists(firstInstance, conditions, true) &&
+        checkIfConditonExists(secondInstance, conditions, true)
+      ) {
+        this.champUtilInfo.enemyCurrentHealth -= firstRDamage.value;
+        missingHealth.enemyCurrentHealth =
+          this.champUtilInfo.enemyCurrentHealth;
+        const secondRDamage = r.getDamageBasedOnEnemyMissingHealth(
+          missingHealth,
+          { ability: 0, effect: 2, leveling: 0 }
+        );
+        return [firstRDamage, secondRDamage];
+      } else if (checkIfConditonExists(firstInstance, conditions, true))
+        return [firstRDamage];
+      else {
+        const secondRDamage = r.getDamageBasedOnEnemyMissingHealth(
+          missingHealth,
+          { ability: 0, effect: 2, leveling: 0 }
+        );
+        return [secondRDamage];
+      }
+    }
     return [];
   }
 }
