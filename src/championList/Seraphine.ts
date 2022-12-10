@@ -22,19 +22,19 @@ export class Seraphine extends Champion {
     this.noteStacks++;
   }
 
-  override autoAttack(): Damage | Damage[] | null {
+  override autoAttack(): Damage[]  {
     const autoAttackDamage = new Damage(
       DamageType.PHYSICAL_DAMAGE,
       this.champTotalStats.attackDamage
     );
     if (this.noteStacks !== 0) {
       const passiveDamage = this.passiveAction();
-      return [autoAttackDamage, passiveDamage!];
+      return [autoAttackDamage, passiveDamage[0]!];
     }
-    return autoAttackDamage;
+    return [autoAttackDamage];
   }
 
-  override passiveAction(): Damage | null {
+  override passiveAction(): Damage[] {
     const scaledDamage = this.champTotalStats.abilityPower * 0.07;
     const damage = new Damage(DamageType.MAGIC_DAMAGE);
 
@@ -49,10 +49,10 @@ export class Seraphine extends Champion {
     else if (this.champLevel < 19)
       damage.value = (24 + scaledDamage) * this.noteStacks;
 
-    return damage;
+    return [damage];
   }
 
-  override qAction(): Damage | null {
+  override qAction(): Damage[] {
     const q: Ability = this.champAbilities.Q;
     if (q.checkIfInsideBounds()) {
       this.increaseNoteStacks();
@@ -61,28 +61,28 @@ export class Seraphine extends Champion {
         this.champUtilInfo.enemyCurrentHealth,
         this.champMissingHealthAmpInfo
       );
-      return q.getDamageBasedOnEnemyMissingHealth(missingHealthData);
+      return [q.getDamageBasedOnEnemyMissingHealth(missingHealthData)];
     }
-    return null;
+    return [];
   }
 
-  override wAction(): Damage | null {
-    return null;
+  override wAction(): Damage[] {
+    return [];
   }
 
-  override eAction(): Damage | null {
+  override eAction(): Damage[] {
     const e: Ability = this.champAbilities.E;
     if (e.checkIfInsideBounds()) {
-      return e.getDamage();
+      return [e.getDamage()];
     }
-    return null;
+    return [];
   }
 
-  override rAction(): Damage | null {
+  override rAction(): Damage[] {
     const r: Ability = this.champAbilities.R;
     if (r.checkIfInsideBounds()) {
-      return r.getDamage();
+      return [r.getDamage()];
     }
-    return null;
+    return [];
   }
 }

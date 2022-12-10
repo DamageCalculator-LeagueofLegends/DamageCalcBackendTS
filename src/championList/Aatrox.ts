@@ -13,27 +13,27 @@ export class Aatrox extends Champion {
   constructor(rawChampion: RawChampion) {
     super(rawChampion);
   }
-  override autoAttack(): Damage | Damage[] | null {
+  override autoAttack():  Damage[]  {
     const autoAttackDamage = new Damage(
       DamageType.PHYSICAL_DAMAGE,
       this.champTotalStats.attackDamage
     );
-    if (!this.hasPassive) return autoAttackDamage;
+    if (!this.hasPassive) return [autoAttackDamage];
 
-    const passiveDamage = this.passiveAction() as Damage;
+    const passiveDamage = this.passiveAction()[0] as Damage;
     this.hasPassive = false;
 
     return [autoAttackDamage, passiveDamage];
   }
 
-  override passiveAction(): Damage | Damage[] | null {
+  override passiveAction(): Damage[] {
     const damage = new Damage(DamageType.PHYSICAL_DAMAGE);
     const amplifier = 0.0459 + 0.0041 * this.champLevel;
     damage.value = this.champUtilInfo.enemyMaxHealth * amplifier;
-    return damage;
+    return [damage];
   }
 
-  override qAction(): Damage | Damage[] | null {
+  override qAction(): Damage[] {
     const q = this.champAbilities.Q;
     const { conditions: conditions } = q.dynamicData.actionConditions;
     if (q.checkIfInsideBounds()) {
@@ -48,14 +48,14 @@ export class Aatrox extends Champion {
       for (let i = 0; i < 3; i++) {
         if (checkIfConditonExists(attributeCondition, conditions, i))
           if (checkIfConditonExists(sweetSportCondition, conditions, true))
-            return q.getDamage({ ability: 0, effect: i + 2, leveling: 1 });
-        return q.getDamage({ ability: 0, effect: i + 2, leveling: 0 });
+            return [q.getDamage({ ability: 0, effect: i + 2, leveling: 1 })];
+        return [q.getDamage({ ability: 0, effect: i + 2, leveling: 0 })];
       }
     }
-    return null;
+    return [];
   }
 
-  override wAction(): Damage | Damage[] | null {
+  override wAction(): Damage[]  {
     const w = this.champAbilities.W;
     const { conditions: conditions } = w.dynamicData.actionConditions;
     if (w.checkIfInsideBounds()) {
@@ -64,17 +64,17 @@ export class Aatrox extends Champion {
         AllConditions.tetherCompleted
       );
       if (checkIfConditonExists(tetherCondition, conditions, true))
-        return w.getDamage({ ability: 0, effect: 2, leveling: 0 });
-      return w.getDamage();
+        return [w.getDamage({ ability: 0, effect: 2, leveling: 0 })];
+      return [w.getDamage()];
     }
-    return null;
+    return [];
   }
 
-  override eAction(): Damage | Damage[] | null {
-    return null;
+  override eAction(): Damage[] {
+    return [];
   }
 
-  override rAction(): Damage | Damage[] | null {
+  override rAction(): Damage[] {
     const r = this.champAbilities.R;
     r.setAttributeIndicies({ ability: 0, effect: 2, leveling: 0 });
     if (r.checkIfInsideBounds()) {
@@ -83,6 +83,6 @@ export class Aatrox extends Champion {
       const bonusADFromR = this.champTotalStats.attackDamage * (adValue / 100);
       this.updateTotalBonusAndScalingValues(bonusADFromR, 'attackDamage');
     }
-    return null;
+    return [];
   }
 }

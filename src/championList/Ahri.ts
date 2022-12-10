@@ -13,7 +13,7 @@ export class Ahri extends Champion {
     super(rawChampion);
   }
 
-  override qAction(): Damage | Damage[] | null {
+  override qAction(): Damage[] {
     const q = this.champAbilities.Q;
     const { conditions: conditions } = q.dynamicData.actionConditions;
     if (q.checkIfInsideBounds()) {
@@ -33,37 +33,37 @@ export class Ahri extends Champion {
       )
         return [firstPassDamage, secondPassDamage];
       else if (checkIfConditonExists(hasFirstPass, conditions, true))
-        return firstPassDamage;
+        return [firstPassDamage];
       else if (checkIfConditonExists(hasSecondPass, conditions, true))
-        return secondPassDamage;
+        return [secondPassDamage];
     }
-    return null;
+    return [];
   }
 
-  override wAction(): Damage | Damage[] | null {
+  override wAction(): Damage[] {
     const w = this.champAbilities.W;
     const { conditions } = w.dynamicData.actionConditions;
     if (w.checkIfInsideBounds()) {
       const firstHit = w.getDamage({ ability: 0, effect: 1, leveling: 0 });
       const subsequentHit = w.getDamage({ ability: 0, effect: 2, leveling: 0 });
       const amountHit = checkCondition(conditions, AC.numberOfUsages);
-      if (checkIfConditonExists(amountHit, conditions, 1)) return firstHit;
+      if (checkIfConditonExists(amountHit, conditions, 1)) return [firstHit];
       else if (checkIfConditonExists(amountHit, conditions, 2))
         return [firstHit, subsequentHit];
       else if (checkIfConditonExists(amountHit, conditions, 3))
         return [firstHit, subsequentHit, subsequentHit];
     }
-    return null;
+    return [];
   }
 
-  override eAction(): Damage | Damage[] | null {
+  override eAction(): Damage[] {
     const e = this.champAbilities.E
     if (e.checkIfInsideBounds())
-      return e.getDamage()
-    return null;
+      return [e.getDamage()]
+    return [];
   }
 
-  override rAction(): Damage | Damage[] | null {
-    return null;
+  override rAction(): Damage[] {
+    return [];
   }
 }
