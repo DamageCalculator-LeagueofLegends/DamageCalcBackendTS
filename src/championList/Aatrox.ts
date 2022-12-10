@@ -35,7 +35,7 @@ export class Aatrox extends Champion {
 
   override qAction(): Damage[] {
     const q = this.champAbilities.Q;
-    const { conditions: conditions } = q.dynamicData.actionConditions;
+    const { conditions: conditions } = q.dynamicData.actionConditions!;
     if (q.checkIfInsideBounds()) {
       const attributeCondition = checkCondition(
         conditions,
@@ -57,7 +57,7 @@ export class Aatrox extends Champion {
 
   override wAction(): Damage[] {
     const w = this.champAbilities.W;
-    const { conditions: conditions } = w.dynamicData.actionConditions;
+    const { conditions: conditions } = w.dynamicData.actionConditions!;
     if (w.checkIfInsideBounds()) {
       const tetherCondition = checkCondition(
         conditions,
@@ -79,7 +79,7 @@ export class Aatrox extends Champion {
     r.setAttributeIndicies({ ability: 0, effect: 2, leveling: 0 });
     if (r.checkIfInsideBounds()) {
       const adValue =
-        r.getAbilityModifiers()[0]?.values[r.dynamicData.skillLevel]!;
+        r.getAbilityModifiers()[0]?.values[r.dynamicData.skillLevel!]!;
       const bonusADFromR = this.champTotalStats.attackDamage * (adValue / 100);
       this.updateTotalBonusAndScalingValues(bonusADFromR, 'attackDamage');
     }

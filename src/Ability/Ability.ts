@@ -10,7 +10,9 @@ export class Ability {
   staticData: AbilityStaticData[];
   dynamicData: AbilityDynamicData;
 
-  constructor() {}
+  constructor() {
+    this.dynamicData = {};
+  }
   updateDynamicData(updatedDynamicData: AbilityDynamicData) {
     const {
       bounds,
@@ -70,7 +72,7 @@ export class Ability {
   baseDamage(): number {
     for (const modifier of this.getAbilityModifiers()) {
       if (modifier.units[0] === '') {
-        return modifier.values[this.dynamicData.skillLevel] ?? 0;
+        return modifier.values[this.dynamicData.skillLevel!] ?? 0;
       }
     }
 
@@ -80,12 +82,12 @@ export class Ability {
   scaledDamage(): number {
     const listOfScaledValues: ScaledValue[] = getScaledVales(
       this.getAbilityModifiers(),
-      this.dynamicData.skillLevel
+      this.dynamicData.skillLevel!
     );
     let damageValue = 0;
     for (const scaledValue of listOfScaledValues) {
       for (const [champUnit, champValue] of Object.entries(
-        this.dynamicData.scalingValues
+        this.dynamicData.scalingValues!
       )) {
         if (scaledValue.scaledUnit === champUnit) {
           damageValue += (scaledValue.value / 100) * champValue;
@@ -96,7 +98,7 @@ export class Ability {
   }
 
   getAbilityModifiers(): Modifier[] {
-    const { ability, effect, leveling } = this.dynamicData.attributeIndicies;
+    const { ability, effect, leveling } = this.dynamicData.attributeIndicies!;
 
     const currAbilty = this.staticData[ability];
     return currAbilty?.effects[effect]?.leveling[leveling]?.modifiers!;
@@ -108,6 +110,6 @@ export class Ability {
 
   checkIfInsideBounds(): boolean {
     const { bounds, skillLevel } = this.dynamicData;
-    return bounds!.lower <= skillLevel && skillLevel < bounds!.upper;
+    return bounds!.lower <= skillLevel! && skillLevel! < bounds!.upper;
   }
 }

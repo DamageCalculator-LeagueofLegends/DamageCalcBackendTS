@@ -5,8 +5,8 @@ import { Bounds } from './Bounds';
 
 export interface AbilityDynamicData {
   bounds?: Bounds;
-  actionConditions: ActionConditions;
-  skillLevel: number;
-  attributeIndicies: AbilityAtributeIndicies;
-  scalingValues: ScalingValuesForChampAbilities;
+  actionConditions?: ActionConditions;
+  skillLevel?: number;
+  attributeIndicies?: AbilityAtributeIndicies;
+  scalingValues?: ScalingValuesForChampAbilities;
 }

@@ -34,17 +34,36 @@ export abstract class Champion {
   // weil attackspeed cringe
   attackSpeedRatio: number;
 
-  champBasedOnLevelStats: BasedOnLevelStats;
-  champBonusStats: BonusStats;
+  champBasedOnLevelStats: BasedOnLevelStats | null = null;
+  champBonusStats: BonusStats = {
+    healthPoints: 0,
+    mana: 0,
+    armor: 0,
+    magicResistance: 0,
+    attackDamage: 0,
+    attackSpeed: 0,
+  };
   champTotalStats: TotalStats;
 
-  champItems: Item[];
+  champItems: Item[] = [];
 
-  champUtilInfo: UtilInfo;
+  champUtilInfo: UtilInfo = {
+    hasMythic: false,
+
+    enemyMaxHealth: 0,
+    enemyCurrentHealth: 0,
+
+    baseHealthRegen: 0,
+    baseManaRegen: 0,
+  };
   champMissingHealthAmpInfo: ChampionMissingHealthAmp;
 
   private _champBounds: BoundsList;
-  champScalingValues: ScalingValuesForChampAbilities;
+  champScalingValues: ScalingValuesForChampAbilities = {
+    AD: 0,
+    'bonus AD': 0,
+    AP: 0,
+  };
   champAbilities: ChampionAbilities;
 
   constructor(rawChampData: RawChampion) {
@@ -69,11 +88,9 @@ export abstract class Champion {
   }
 
   set champBounds(bounds: BoundsList) {
-    const { champAbilities } = this;
-    for (const ability in champAbilities) {
-      champAbilities[ability]!.dynamicData.bounds = bounds[ability];
+    for (const ability in this.champAbilities) {
+      this.champAbilities[ability]!.dynamicData.bounds = bounds[ability];
     }
-
     this._champBounds = bounds;
   }
 
@@ -102,7 +119,6 @@ export abstract class Champion {
       attackDamage,
       attackSpeed,
     } = baseStats;
-
     const { champLevel, champUtilInfo, champBonusStats } = this;
 
     const stats: BasedOnLevelStats = {
@@ -115,9 +131,9 @@ export abstract class Champion {
       attackDamage: getStatBasedOnLevel(attackDamage, champLevel),
     };
 
-    champUtilInfo.baseHealthRegen = healthRegen.flat;
-    champUtilInfo.baseManaRegen = manaRegen.flat;
-    champBonusStats.attackSpeed = setAttackSpeedBasedOnLevel(
+    this.champUtilInfo.baseHealthRegen = healthRegen.flat;
+    this.champUtilInfo.baseManaRegen = manaRegen.flat;
+    this.champBonusStats.attackSpeed = setAttackSpeedBasedOnLevel(
       attackSpeed.perLevel,
       champLevel
     );
@@ -144,7 +160,7 @@ export abstract class Champion {
     stats.attackSpeed = setAttackSpeed(
       this.rawChampData.stats.attackSpeed.flat,
       this.attackSpeedRatio,
-      this.champBonusStats.attackSpeed
+      this.champBonusStats!.attackSpeed
     );
     this.champTotalStats = stats;
   }

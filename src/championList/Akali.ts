@@ -32,7 +32,7 @@ export class Akali extends Champion {
   }
 
   override passiveAction(): Damage[] {
-    const adAmp = this.champBonusStats.attackDamage * 0.6;
+    const adAmp = this.champBonusStats!.attackDamage * 0.6;
     const apAmp = this.champTotalStats.abilityPower * 0.55;
     let baseDamage = 32;
 
@@ -65,7 +65,7 @@ export class Akali extends Champion {
 
   override eAction(): Damage[] {
     const e = this.champAbilities.E;
-    const { conditions } = e.dynamicData.actionConditions;
+    const { conditions } = e.dynamicData.actionConditions!;
     if (e.checkIfInsideBounds()) {
       const firstInstance = checkCondition(conditions, AC.firstInstance);
       const secondInstance = checkCondition(conditions, AC.secondInstance);
@@ -81,7 +81,7 @@ export class Akali extends Champion {
 
   override rAction(): Damage[] {
     const r = this.champAbilities.R;
-    const { conditions } = r.dynamicData.actionConditions;
+    const { conditions } = r.dynamicData.actionConditions!;
     const { enemyCurrentHealth, enemyMaxHealth } = this.champUtilInfo;
     if (r.checkIfInsideBounds()) {
       // technically works for both instances not implemented yet

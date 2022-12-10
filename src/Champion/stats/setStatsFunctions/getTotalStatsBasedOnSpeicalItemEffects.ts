@@ -5,7 +5,7 @@ import { TotalStats } from '../TotalStats';
 
 export function getTotalStatsBasedOnSpeicalItemEffects(
   items: Item[],
-  levelStats: BasedOnLevelStats,
+  levelStats: BasedOnLevelStats | null,
   bonusStats: BonusStats,
   totalStats: TotalStats
 ): UpdateStats | null {
@@ -23,9 +23,9 @@ export function getTotalStatsBasedOnSpeicalItemEffects(
       //Sterak's Gage
       if (item.itemID === 3053) {
         currUpdatedStats.bonusStats.attackDamage +=
-          0.45 * levelStats.attackDamage;
+          0.45 * levelStats!.attackDamage;
         currUpdatedStats.totalStats.attackDamage +=
-          0.45 * levelStats.attackDamage;
+          0.45 * levelStats!.attackDamage;
         currStats = currUpdatedStats;
       }
       //Rabadon's Deathcap
