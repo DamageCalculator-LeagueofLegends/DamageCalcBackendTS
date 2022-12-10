@@ -35,3 +35,14 @@ export interface checkedConditions {
   hasCondition: boolean;
   index?: number;
 }
+
+export function checkIfConditonExists(
+  checkedCond: checkedConditions,
+  conditions: Condition[],
+  checkWith: boolean | number
+): boolean {
+  return (
+    checkedCond.hasCondition === true &&
+    conditions[checkedCond.index!]?.value === checkWith
+  );
+}
