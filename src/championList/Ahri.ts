@@ -57,6 +57,9 @@ export class Ahri extends Champion {
   }
 
   override eAction(): Damage | Damage[] | null {
+    const e = this.champAbilities.E
+    if (e.checkIfInsideBounds())
+      return e.getDamage()
     return null;
   }
 
