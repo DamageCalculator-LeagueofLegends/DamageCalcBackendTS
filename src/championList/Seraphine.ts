@@ -65,12 +65,14 @@ export class Seraphine extends Champion {
   }
 
   override wAction(): Damage[] {
+    this.increaseNoteStacks();
     return [];
   }
 
   override eAction(): Damage[] {
     const e: Ability = this.champAbilities.E;
     if (e.checkIfInsideBounds()) {
+      this.increaseNoteStacks();
       return [e.getDamage()];
     }
     return [];
@@ -79,6 +81,7 @@ export class Seraphine extends Champion {
   override rAction(): Damage[] {
     const r: Ability = this.champAbilities.R;
     if (r.checkIfInsideBounds()) {
+      this.increaseNoteStacks();
       return [r.getDamage()];
     }
     return [];
