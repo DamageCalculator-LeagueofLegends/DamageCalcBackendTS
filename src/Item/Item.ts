@@ -1,22 +1,28 @@
+import { ActionConditions } from '../Ability/dynamicAbilityData/ActionConditions';
+import { ScalingValuesForChampAbilities } from '../Champion/ScalingValuesForChampAbilities';
+import { Damage } from '../Damage/Damage';
 import { Url } from '../RawChampion/RawChampion';
 import { ItemStats } from '../RawItem/ItemStats';
 import { Passive } from '../RawItem/Passive';
 import { RawItem } from '../RawItem/RawItem';
+import { ItemDynamicData } from './ItemDynamicData';
 
 export abstract class Item {
   itemID: number;
   itemName: string;
   itemIcon: Url;
 
-  isLegendary: boolean;
-  isMythic: boolean;
-  hasActive: boolean;
-  isUnique: boolean;
+  isLegendary: boolean = false;
+  isMythic: boolean = false;
+  hasActive: boolean = false;
+  isUnique: boolean = false;
 
   itemStats: ItemStats;
   mythicStats: ItemStats;
 
-  constructor(rawItem: RawItem) {
+  dynamicData: ItemDynamicData;
+
+  constructor(rawItem: RawItem, dynamicData: ItemDynamicData) {
     this.itemID = rawItem.id;
     this.itemName = rawItem.name;
     this.itemIcon = rawItem.icon;
@@ -24,6 +30,8 @@ export abstract class Item {
     this.itemStats = rawItem.stats;
 
     this.setMythicStats(rawItem.passives);
+
+    this.dynamicData = dynamicData;
   }
 
   setMythicStats(itemPassives: Passive[]) {
@@ -34,5 +42,21 @@ export abstract class Item {
         }
       }
     }
+  }
+
+  updateScalingValues(scalingValues: ScalingValuesForChampAbilities) {
+    this.dynamicData.scalingValues = scalingValues;
+  }
+
+  updateActionConditions(actionConditions: ActionConditions) {
+    this.dynamicData.actionConditions = actionConditions;
+  }
+
+  updateEnemyMaxHealth(enemyMaxHealth: number) {
+    this.dynamicData.enemyMaxHealth = enemyMaxHealth;
+  }
+
+  passiveDmg(): Damage[] {
+    return [];
   }
 }
