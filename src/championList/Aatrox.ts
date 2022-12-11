@@ -41,15 +41,18 @@ export class Aatrox extends Champion {
         conditions,
         AllConditions.numberOfAttribute
       );
-      const sweetSportCondition = checkCondition(
+      const sweetSpotCondition = checkCondition(
         conditions,
         AllConditions.isSweetSpot
       );
+
       for (let i = 0; i < 3; i++) {
-        if (checkIfConditonExists(attributeCondition, conditions, i))
-          if (checkIfConditonExists(sweetSportCondition, conditions, true))
+        if (checkIfConditonExists(attributeCondition, conditions, i)) {
+          if (checkIfConditonExists(sweetSpotCondition, conditions, true)) {
             return [q.getDamage({ ability: 0, effect: i + 2, leveling: 1 })];
-        return [q.getDamage({ ability: 0, effect: i + 2, leveling: 0 })];
+          }
+          return [q.getDamage({ ability: 0, effect: i + 2, leveling: 0 })];
+        }
       }
     }
     return [];
