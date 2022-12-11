@@ -18,7 +18,7 @@ export class MissingHealthCalculation {
       perPercentage: missingHealthData.perPercentage / 2500,
       cappedAt: missingHealthData.cappedAt,
     };
-    this.enemyMissingHealth = enemyCurrentHealth;
+    this.enemyCurrentHealth = enemyCurrentHealth;
   }
 
   set enemyCurrentHealth(enemyCurrentHealth: number) {
@@ -52,16 +52,14 @@ function calculateAmplifierBasedOnMissingHealth(
 ) {
   let amplifier: number = missingHealthData.damageAmplifier;
   let missingHealthIterator: number = missingHealthData.perPercentage;
-  for (
-    let i = 0;
-    i <= Math.round(missingHealthData.cappedAt / missingHealthIterator);
-    i++
-  ) {
+  const loopCond =
+    Math.round(missingHealthData.cappedAt / missingHealthIterator) + 1;
+  for (let i = 0; i < loopCond; i++) {
     if (missingHealth < missingHealthData.perPercentage) {
       amplifier = 0;
       break;
     } else if (
-      (missingHealthData.perPercentage < missingHealth &&
+      (missingHealthIterator < missingHealth &&
         missingHealth <
           missingHealthIterator + missingHealthData.perPercentage) ||
       missingHealth === missingHealthIterator
