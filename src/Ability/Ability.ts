@@ -4,7 +4,7 @@ import { AbilityStaticData } from '../RawChampion/abilities/AbilityStaticData';
 import { Modifier } from '../RawChampion/abilities/Modifier';
 import { AbilityAtributeIndicies } from './dynamicAbilityData/AbilityAtributeIndicies';
 import { AbilityDynamicData } from './dynamicAbilityData/AbilityDynamicData';
-import { ScaledValue, getScaledVales } from './ScaledValue';
+import { ScaledValue, getScaledValues } from './ScaledValue';
 
 export class Ability {
   staticData: AbilityStaticData[];
@@ -80,7 +80,7 @@ export class Ability {
   }
 
   scaledDamage(): number {
-    const listOfScaledValues: ScaledValue[] = getScaledVales(
+    const listOfScaledValues: ScaledValue[] = getScaledValues(
       this.getAbilityModifiers(),
       this.dynamicData.skillLevel!
     );
