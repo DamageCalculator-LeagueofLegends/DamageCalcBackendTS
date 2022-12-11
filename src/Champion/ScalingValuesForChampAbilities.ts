@@ -1,7 +1,7 @@
 export interface ScalingValuesForChampAbilities {
-  AD: number;
-  'bonus AD': number;
-  AP: number;
+  '% AD': number;
+  '% bonus AD': number;
+  '% AP': number;
 
   [key: string]: number;
 }

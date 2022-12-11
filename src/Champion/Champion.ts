@@ -56,13 +56,17 @@ export abstract class Champion {
     baseHealthRegen: 0,
     baseManaRegen: 0,
   };
-  champMissingHealthAmpInfo: ChampionMissingHealthAmp;
+  champMissingHealthAmpInfo: ChampionMissingHealthAmp = {
+    damageAmplifier: 0,
+    perPercentage: 0,
+    cappedAt: 0,
+  };
 
   private _champBounds: BoundsList;
   champScalingValues: ScalingValuesForChampAbilities = {
-    AD: 0,
-    'bonus AD': 0,
-    AP: 0,
+    '% AD': 0,
+    '% bonus AD': 0,
+    '% AP': 0,
   };
   champAbilities: ChampionAbilities;
 
@@ -191,9 +195,9 @@ export abstract class Champion {
 
   setChampScalingValues() {
     const { attackDamage, abilityPower } = this.champTotalStats;
-    this.champScalingValues.AD = attackDamage;
-    this.champScalingValues.AP = abilityPower;
-    this.champScalingValues['bonus AD'] = this.champBonusStats.attackDamage;
+    this.champScalingValues['% AD'] = attackDamage;
+    this.champScalingValues['% AP'] = abilityPower;
+    this.champScalingValues['% bonus AD'] = this.champBonusStats.attackDamage;
 
     this.champAbilities.Q.dynamicData.scalingValues = this.champScalingValues;
     this.champAbilities.W.dynamicData.scalingValues = this.champScalingValues;
@@ -201,11 +205,37 @@ export abstract class Champion {
     this.champAbilities.R.dynamicData.scalingValues = this.champScalingValues;
   }
 
-  setDynamicAbilityData(dynamicData: AbilityDynamicData) {
-    this.champAbilities.Q.dynamicData = dynamicData;
-    this.champAbilities.W.dynamicData = dynamicData;
-    this.champAbilities.E.dynamicData = dynamicData;
-    this.champAbilities.R.dynamicData = dynamicData;
+  setDynamicAbilityDataQ(dynamicData: AbilityDynamicData) {
+    const tempDynamicData = {
+      ...this.champAbilities.Q.dynamicData,
+      actionConditions: dynamicData.actionConditions,
+      skillLevel: dynamicData.skillLevel,
+    };
+    this.champAbilities.Q.dynamicData = tempDynamicData;
+  }
+  setDynamicAbilityDataW(dynamicData: AbilityDynamicData) {
+    const tempDynamicData = {
+      ...this.champAbilities.Q.dynamicData,
+      actionConditions: dynamicData.actionConditions,
+      skillLevel: dynamicData.skillLevel,
+    };
+    this.champAbilities.W.dynamicData = tempDynamicData;
+  }
+  setDynamicAbilityDataE(dynamicData: AbilityDynamicData) {
+    const tempDynamicData: AbilityDynamicData = {
+      ...this.champAbilities.Q.dynamicData,
+      actionConditions: dynamicData.actionConditions,
+      skillLevel: dynamicData.skillLevel,
+    };
+    this.champAbilities.E.dynamicData = tempDynamicData;
+  }
+  setDynamicAbilityDataR(dynamicData: AbilityDynamicData) {
+    const tempDynamicData = {
+      ...this.champAbilities.Q.dynamicData,
+      actionConditions: dynamicData.actionConditions,
+      skillLevel: dynamicData.skillLevel,
+    };
+    this.champAbilities.R.dynamicData = tempDynamicData;
   }
 
   autoAttack(): Damage[] {
