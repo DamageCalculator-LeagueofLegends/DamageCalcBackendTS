@@ -6,5 +6,6 @@ export interface Passive {
   name: string;
   effects?: string | null;
   range?: number | null;
+  cooldown?: number | string | null;
   stats: ItemStats;
 }
