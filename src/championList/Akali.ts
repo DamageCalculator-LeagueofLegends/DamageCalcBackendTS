@@ -99,6 +99,9 @@ export class Akali extends Champion {
         checkIfConditonExists(secondInstance, conditions, true)
       ) {
         this.champUtilInfo.enemyCurrentHealth -= firstRDamage.value;
+        if (this.champUtilInfo.enemyCurrentHealth < 0) {
+          this.champUtilInfo.enemyCurrentHealth = 0;
+        }
         missingHealth.enemyCurrentHealth =
           this.champUtilInfo.enemyCurrentHealth;
         const secondRDamage = r.getDamageBasedOnEnemyMissingHealth(
