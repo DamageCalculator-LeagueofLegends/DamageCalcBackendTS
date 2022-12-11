@@ -27,7 +27,7 @@ export function checkCondition(
 ): checkedConditions {
   for (const index in listOfConditions)
     if (listOfConditions[index]!.type === conditionToCheckWith)
-      return { hasCondition: false, index: parseInt(index) };
+      return { hasCondition: true, index: parseInt(index) };
   return { hasCondition: false };
 }
 
