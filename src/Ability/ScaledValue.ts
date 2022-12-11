@@ -5,7 +5,7 @@ export interface ScaledValue {
   value: number;
 }
 
-export function getScaledVales(
+export function getScaledValues(
   modifiers: Modifier[],
   skillLevel: number
 ): ScaledValue[] {
