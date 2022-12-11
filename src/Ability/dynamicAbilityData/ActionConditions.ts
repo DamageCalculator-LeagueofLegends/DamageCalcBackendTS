@@ -13,12 +13,16 @@ export type Condition =
     };
 
 export enum AllConditions {
+  // Champions
   'isSweetSpot' = 'isSweetSpot', // Aatrox
   'numberOfAttribute' = 'numberOfAttribute', // Aatrox
   'tetherCompleted' = 'tetherCompleted', // Aatrox
   'numberOfUsages' = 'numberOfUsages', // Ahri
   'firstInstance' = 'firstInstance', // Ahri, Akali
   'secondInstance' = 'secondInstance', // Ahri, Akali
+
+  // Items
+  'secondsApplied' = 'secondsApplied',
 }
 
 export function checkCondition(
