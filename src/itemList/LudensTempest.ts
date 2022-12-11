@@ -6,8 +6,8 @@ import { DamageType } from '../RawChampion/abilities/staticDataEnums';
 import { RawItem } from '../RawItem/RawItem';
 
 export class LudensTempest extends Item {
-  constructor(rawItem: RawItem, dynamicData: ItemDynamicData) {
-    super(rawItem, dynamicData);
+  constructor(rawItem: RawItem) {
+    super(rawItem);
     this.isMythic = true;
     this.isUnique = true;
   }

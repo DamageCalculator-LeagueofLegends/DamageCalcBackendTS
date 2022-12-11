@@ -22,7 +22,7 @@ export abstract class Item {
 
   dynamicData: ItemDynamicData;
 
-  constructor(rawItem: RawItem, dynamicData: ItemDynamicData) {
+  constructor(rawItem: RawItem) {
     this.itemID = rawItem.id;
     this.itemName = rawItem.name;
     this.itemIcon = rawItem.icon;
@@ -30,7 +30,9 @@ export abstract class Item {
     this.itemStats = rawItem.stats;
 
     this.setMythicStats(rawItem.passives);
+  }
 
+  setDynamicData(dynamicData: ItemDynamicData) {
     this.dynamicData = dynamicData;
   }
 
