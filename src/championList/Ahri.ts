@@ -15,7 +15,7 @@ export class Ahri extends Champion {
 
   override qAction(): Damage[] {
     const q = this.champAbilities.Q;
-    const { conditions: conditions } = q.dynamicData.actionConditions;
+    const { conditions: conditions } = q.dynamicData.actionConditions!;
     if (q.checkIfInsideBounds()) {
       const firstPassDamage = new Damage(
         DamageType.MAGIC_DAMAGE,
@@ -42,7 +42,7 @@ export class Ahri extends Champion {
 
   override wAction(): Damage[] {
     const w = this.champAbilities.W;
-    const { conditions } = w.dynamicData.actionConditions;
+    const { conditions } = w.dynamicData.actionConditions!;
     if (w.checkIfInsideBounds()) {
       const firstHit = w.getDamage({ ability: 0, effect: 1, leveling: 0 });
       const subsequentHit = w.getDamage({ ability: 0, effect: 2, leveling: 0 });
@@ -64,13 +64,13 @@ export class Ahri extends Champion {
 
   override rAction(): Damage[] {
     const r = this.champAbilities.R;
-    const { conditions } = r.dynamicData.actionConditions;
+    const { conditions } = r.dynamicData.actionConditions!;
     const listOfRDamages: Damage[] = [];
     if (r.checkIfInsideBounds()) {
       const damage = r.getDamage();
       const amountOfR = checkCondition(conditions, AC.numberOfUsages);
       if (amountOfR.hasCondition == true)
-        for (let i = 0; i <= conditions[amountOfR.index!]?.value!; i++) {
+        for (let i = 0; i < conditions[amountOfR.index!]?.value!; i++) {
           listOfRDamages.push(damage);
         }
     }
