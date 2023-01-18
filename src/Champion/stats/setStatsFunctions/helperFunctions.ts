@@ -17,7 +17,7 @@ export function getNumberOfLegendaryItems(items: Item[]): number {
 }
 
 export function checkForMythicItemAndGetMythicItem(items: Item[]): Item | null {
-  return items.find((item) => item.isMythic) || null;
+  return items.find((item) => item.isMythic === true) || null;
 }
 
 export function setAttackSpeedBasedOnLevel(growth: number, level: number) {

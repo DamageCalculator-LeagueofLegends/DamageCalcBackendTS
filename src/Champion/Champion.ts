@@ -22,8 +22,10 @@ import { BoundsList } from '../Ability/dynamicAbilityData/Bounds';
 import { AbilityDynamicData } from '../Ability/dynamicAbilityData/AbilityDynamicData';
 import { Damage } from '../Damage/Damage';
 import { DamageType } from '../RawChampion/abilities/staticDataEnums';
+import { FighterUnit } from '../Fighter/Fighter';
+import { ActionConditions } from '../Ability/dynamicAbilityData/ActionConditions';
 
-export abstract class Champion {
+export class Champion extends FighterUnit {
   rawChampData: RawChampion;
   champID: number;
   champName: string;
@@ -71,10 +73,11 @@ export abstract class Champion {
   champAbilities: ChampionAbilities;
 
   constructor(rawChampData: RawChampion) {
+    super('CHAMPION', true);
     this.rawChampData = rawChampData;
     this.champID = rawChampData.id;
     this.champName = rawChampData.name;
-    this.champIcon = rawChampData.icon;
+    this.champIcon = "https://" + rawChampData.icon.substring(7);
     this.attackSpeedRatio = rawChampData.stats.attackSpeedRatio.flat;
     this.champAbilities = {
       Q: this.getStaticAbilityData('Q'),
@@ -104,11 +107,18 @@ export abstract class Champion {
 
   getStaticAbilityData(key: string): Ability {
     let ability: Ability = new Ability();
+    const dynmaicData: AbilityDynamicData = {
+      actionConditions: null,
+      skillLevel: null,
+      attributeIndicies: null,
+      scalingValues: null
+    }
     const staticAbilityData = this.rawChampData.abilities[key];
 
     if (staticAbilityData) {
       ability.staticData = staticAbilityData;
     }
+    ability.dynamicData = dynmaicData
     return ability;
   }
 
@@ -185,11 +195,21 @@ export abstract class Champion {
     }
   }
 
+  setFightingStats() {
+    this.combatStats = {
+      totalHealth: this.champTotalStats.healthPoints,
+      currentHealth: this.champTotalStats.healthPoints,
+      armor: this.champTotalStats.armor,
+      magicResistance: this.champTotalStats.magicResistance,
+    };
+  }
+
   configureChampionStatsBasedOnLevelAndItems() {
     this.setChampBasedOnLevelStats(this.rawChampData.stats);
     this.setChampBonusStats();
     this.setTotalStats();
     this.updateStatsBasedOnSpecialItems();
+    this.setFightingStats();
     this.setChampScalingValues();
   }
 
@@ -205,37 +225,36 @@ export abstract class Champion {
     this.champAbilities.R.dynamicData.scalingValues = this.champScalingValues;
   }
 
-  setDynamicAbilityDataQ(dynamicData: AbilityDynamicData) {
-    const tempDynamicData = {
-      ...this.champAbilities.Q.dynamicData,
-      actionConditions: dynamicData.actionConditions,
-      skillLevel: dynamicData.skillLevel,
-    };
-    this.champAbilities.Q.dynamicData = tempDynamicData;
+  setActionConditionsQ(actionConditions: ActionConditions) {
+    this.champAbilities.Q.dynamicData.actionConditions = actionConditions;
   }
-  setDynamicAbilityDataW(dynamicData: AbilityDynamicData) {
-    const tempDynamicData = {
-      ...this.champAbilities.Q.dynamicData,
-      actionConditions: dynamicData.actionConditions,
-      skillLevel: dynamicData.skillLevel,
-    };
-    this.champAbilities.W.dynamicData = tempDynamicData;
+
+  setSkillLevelQ(skillLevel: number) {
+    this.champAbilities.Q.dynamicData.skillLevel = skillLevel;
   }
-  setDynamicAbilityDataE(dynamicData: AbilityDynamicData) {
-    const tempDynamicData: AbilityDynamicData = {
-      ...this.champAbilities.Q.dynamicData,
-      actionConditions: dynamicData.actionConditions,
-      skillLevel: dynamicData.skillLevel,
-    };
-    this.champAbilities.E.dynamicData = tempDynamicData;
+
+  setActionConditionsW(actionConditions: ActionConditions) {
+    this.champAbilities.W.dynamicData.actionConditions = actionConditions;
   }
-  setDynamicAbilityDataR(dynamicData: AbilityDynamicData) {
-    const tempDynamicData = {
-      ...this.champAbilities.Q.dynamicData,
-      actionConditions: dynamicData.actionConditions,
-      skillLevel: dynamicData.skillLevel,
-    };
-    this.champAbilities.R.dynamicData = tempDynamicData;
+
+  setSkillLevelW(skillLevel: number) {
+    this.champAbilities.W.dynamicData.skillLevel = skillLevel;
+  }
+
+  setActionConditionsE(actionConditions: ActionConditions) {
+    this.champAbilities.E.dynamicData.actionConditions = actionConditions;
+  }
+
+  setSkillLevelE(skillLevel: number) {
+    this.champAbilities.E.dynamicData.skillLevel = skillLevel;
+  }
+
+  setActionConditionsR(actionConditions: ActionConditions) {
+    this.champAbilities.R.dynamicData.actionConditions = actionConditions;
+  }
+
+  setSkillLevelR(skillLevel: number) {
+    this.champAbilities.R.dynamicData.skillLevel = skillLevel;
   }
 
   autoAttack(): Damage[] {
@@ -264,7 +283,10 @@ export abstract class Champion {
     return [];
   }
 
-  updateTotalBonusAndScalingValues(value: number, statName: string) {
+  updateTotalBonusAndScalingValuesBasedOnANewValue(
+    value: number,
+    statName: string
+  ) {
     this.champBonusStats[statName] += value;
     this.champTotalStats[statName] += value;
     this.setChampScalingValues();

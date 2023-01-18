@@ -43,6 +43,7 @@ export class MissingHealthCalculation {
 }
 
 function calculateMissingHealth(totalHealth: number, currentHealth: number) {
+  if (currentHealth < 0) currentHealth = 0;
   return (totalHealth - currentHealth) / totalHealth;
 }
 

@@ -15,7 +15,7 @@ export function totalStatsFromItems(
     abilityPower,
     abilityHaste,
     healAndShieldPower,
-    lifeSteal,
+    lifesteal,
     omnivamp,
     physicalVamp,
     armorPenetration,
@@ -33,30 +33,36 @@ export function totalStatsFromItems(
     tempManaRegen = utilInfo.baseManaRegen * manaRegen.flat;
   return {
     ...currStats,
-    criticalChance: criticalStrikeChance.percent,
-    lethalityFlat: lethality.flat,
-    magicPenFlat: magicPenetration.flat,
-    abilityPower: abilityPower.flat,
-    abilityHaste: abilityHaste.flat,
-    healAndShieldPower: healAndShieldPower.percent,
-    lifeSteal: lifeSteal.percent,
-    omnivamp: omnivamp.percent,
-    physicalVamp: physicalVamp?.percent ?? 0,
+    criticalChance: criticalStrikeChance.percent + currStats.criticalChance,
+    lethalityFlat: lethality.flat + currStats.lethalityFlat,
+    magicPenFlat: magicPenetration.flat + currStats.magicPenFlat,
+    abilityPower: abilityPower.flat + currStats.abilityPower,
+    abilityHaste: abilityHaste.flat + currStats.abilityHaste,
+    healAndShieldPower:
+      healAndShieldPower.percent + currStats.healAndShieldPower,
+    lifeSteal: lifesteal.percent + currStats.lifeSteal,
+    omnivamp: omnivamp.percent + currStats.omnivamp,
+    physicalVamp: physicalVamp?.percent ?? 0 + currStats.omnivamp,
 
-    armorPenPercentage: multiplicativeCalc(
-      currStats.armorPenPercentage,
-      armorPenetration.percent
-    ),
-    magicPenPercentage: multiplicativeCalc(
-      currStats.magicPenPercentage,
-      magicPenetration.percent
-    ),
-    tenacity: multiplicativeCalc(currStats.tenacity, tenacity.flat),
-    slowResistance: multiplicativeCalc(
-      currStats.slowResistance,
-      slowResitance?.percent ?? 0
-    ),
-    healthRegen: tempHealthRegen,
-    manaRegen: tempManaRegen,
+    armorPenPercentage:
+      multiplicativeCalc(
+        currStats.armorPenPercentage,
+        armorPenetration.percent
+      ) + currStats.armorPenPercentage,
+    magicPenPercentage:
+      multiplicativeCalc(
+        currStats.magicPenPercentage,
+        magicPenetration.percent
+      ) + +currStats.magicPenPercentage,
+    tenacity:
+      multiplicativeCalc(currStats.tenacity, tenacity.flat) +
+      currStats.tenacity,
+    slowResistance:
+      multiplicativeCalc(
+        currStats.slowResistance,
+        slowResitance?.percent ?? 0
+      ) + currStats.slowResistance,
+    healthRegen: tempHealthRegen + currStats.healthRegen,
+    manaRegen: tempManaRegen + currStats.manaRegen,
   };
 }

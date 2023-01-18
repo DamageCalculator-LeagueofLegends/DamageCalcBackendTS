@@ -27,3 +27,4 @@ export interface TotalStats {
 
   [key: string]: number;
 }
+const a = 3;

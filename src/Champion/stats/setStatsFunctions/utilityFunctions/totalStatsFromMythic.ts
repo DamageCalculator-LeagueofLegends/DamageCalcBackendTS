@@ -28,24 +28,31 @@ export function totalStatsFromMythic(
 
   return {
     ...currStats,
-    lethalityFlat: lethality.flat * numberOfLegendaryItems,
-    magicPenFlat: magicPenetration.flat * numberOfLegendaryItems,
-    abilityPower: abilityPower.flat * numberOfLegendaryItems,
-    abilityHaste: abilityHaste.flat * numberOfLegendaryItems,
-    omnivamp: omnivamp.flat * numberOfLegendaryItems,
+    lethalityFlat:
+      lethality.flat * numberOfLegendaryItems + currStats.lethalityFlat,
+    magicPenFlat:
+      magicPenetration.flat * numberOfLegendaryItems + currStats.magicPenFlat,
+    abilityPower:
+      abilityPower.flat * numberOfLegendaryItems + currStats.abilityPower,
+    abilityHaste:
+      abilityHaste.flat * numberOfLegendaryItems + currStats.abilityHaste,
+    omnivamp: omnivamp.flat * numberOfLegendaryItems + currStats.omnivamp,
 
-    armorPenPercentage: multiplicativeCalc(
-      currStats.armorPenPercentage,
-      mythicArmorPenPercentage
-    ),
-    magicPenPercentage: multiplicativeCalc(
-      currStats.magicPenPercentage,
-      mythicMagicPenPercentage
-    ),
-    tenacity: multiplicativeCalc(currStats.tenacity, mythicTenacity),
-    slowResistance: multiplicativeCalc(
+    armorPenPercentage:
+      multiplicativeCalc(
+        currStats.armorPenPercentage,
+        mythicArmorPenPercentage
+      ) + currStats.armorPenPercentage,
+    magicPenPercentage:
+      multiplicativeCalc(
+        currStats.magicPenPercentage,
+        mythicMagicPenPercentage
+      ) + currStats.magicPenPercentage,
+    tenacity:
+      multiplicativeCalc(currStats.tenacity, mythicTenacity) +
+      currStats.tenacity,
+    slowResistance:
+      multiplicativeCalc(currStats.slowResistance, mythicSlowResistance) +
       currStats.slowResistance,
-      mythicSlowResistance
-    ),
   };
 }

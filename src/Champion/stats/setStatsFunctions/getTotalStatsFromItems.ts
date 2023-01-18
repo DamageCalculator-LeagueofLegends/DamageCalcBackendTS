@@ -1,3 +1,4 @@
+import { object } from 'zod';
 import { Item } from '../../../Item/Item';
 import { UtilInfo } from '../../UtilInfo';
 import { TotalStats } from '../TotalStats';
@@ -49,17 +50,15 @@ export function getTotalStatsFromItems(
   const hasMythic = mythicItem != null;
 
   for (const item of items) {
-    currStats = {
-      ...currStats,
-      ...totalStatsFromItem(item, currStats, utilInfo),
-    };
+    currStats = totalStatsFromItem(item, currStats, utilInfo);
   }
 
   if (hasMythic) {
-    currStats = {
-      ...currStats,
-      ...totalStatsFromMythic(mythicItem, numberOfLegendaryItems, currStats),
-    };
+    currStats = totalStatsFromMythic(
+      mythicItem,
+      numberOfLegendaryItems,
+      currStats
+    );
   }
 
   currStats = updateMultiplicativeStats(currStats);

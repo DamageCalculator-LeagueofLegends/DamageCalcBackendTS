@@ -84,7 +84,10 @@ export class Aatrox extends Champion {
       const adValue =
         r.getAbilityModifiers()[0]?.values[r.dynamicData.skillLevel!]!;
       const bonusADFromR = this.champTotalStats.attackDamage * (adValue / 100);
-      this.updateTotalBonusAndScalingValues(bonusADFromR, 'attackDamage');
+      this.updateTotalBonusAndScalingValuesBasedOnANewValue(
+        bonusADFromR,
+        'attackDamage'
+      );
     }
     return [];
   }
