@@ -31,7 +31,7 @@ export function getListOfJsonItems(items: Item[]) {
 export async function runServer() {
   const express = require('express');
   const app = express();
-  const port = 3000;
+  const port = 5050;
 
   app.use(express.json());
 
