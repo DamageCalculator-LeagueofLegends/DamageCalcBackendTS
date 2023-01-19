@@ -30,16 +30,16 @@ export function getListOfJsonItems(items: Item[]) {
 
 export async function runServer() {
   const express = require('express');
+  const cors = require("cors")
   const app = express();
   const port = 5050;
 
   app.use(express.json());
-  app.use((req:any, res:any, next:any) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-  });
+  app.use(
+    cors({
+        origin: "*"
+    })
+  )
 
   app.get('/getInitData/:type', async (req: any, res: any) => {
     const champions = getListOfJsonChampions(await listOfChampions);
