@@ -36,6 +36,7 @@ export async function runServer() {
   app.use(express.json());
 
   app.get('/getInitData/:type', async (req: any, res: any) => {
+    res.set("Access-Control-Allow-Origin", "*")
     const champions = getListOfJsonChampions(await listOfChampions);
     // const items = getListOfJsonItems(await listOfItems)
     const items = await listOfItems;
