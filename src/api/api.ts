@@ -34,9 +34,14 @@ export async function runServer() {
   const port = 5050;
 
   app.use(express.json());
+  app.use((req:any, res:any, next:any) => {
+    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
 
   app.get('/getInitData/:type', async (req: any, res: any) => {
-    res.set("Access-Control-Allow-Origin", "*")
     const champions = getListOfJsonChampions(await listOfChampions);
     // const items = getListOfJsonItems(await listOfItems)
     const items = await listOfItems;
