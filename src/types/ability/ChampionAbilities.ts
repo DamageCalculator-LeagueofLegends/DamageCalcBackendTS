@@ -1,4 +1,4 @@
-import { Ability } from '../Ability';
+import { Ability } from '../../fighters/Ability/Ability';
 
 export interface ChampionAbilities {
   Q: Ability;

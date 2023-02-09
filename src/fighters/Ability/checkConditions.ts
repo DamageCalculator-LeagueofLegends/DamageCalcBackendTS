@@ -2,7 +2,7 @@ import {
   AllConditions,
   Condition,
   checkedConditions,
-} from './types/ActionConditions';
+} from '../../types/ability/ActionConditions';
 
 export function checkIfConditonExists(
   checkedCond: checkedConditions,

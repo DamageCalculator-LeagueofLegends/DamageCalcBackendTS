@@ -1,4 +1,4 @@
-import { AllConditions } from '../fighters/Ability/types/ActionConditions';
+import { AllConditions } from '../types/ability/ActionConditions';
 import { FrontendData } from '../types/FrontendData/FrontendData';
 
 // Akali

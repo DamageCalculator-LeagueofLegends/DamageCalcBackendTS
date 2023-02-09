@@ -1,6 +1,6 @@
 import { Router, Request, Response, json } from 'express';
 import { FrontendData } from '../../types/FrontendData/FrontendData';
-import { Simulation } from '../Simulation/Simulation';
+import { Simulation } from '../../execution/Simulation';
 
 export const damageRouter = Router();
 damageRouter.use(json());

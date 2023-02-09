@@ -1,11 +1,11 @@
 import { Damage } from '../Damage/Damage';
-import { MissingHealthCalculation } from '../Damage/types/MissingHealthCalculation';
+import { MissingHealthCalculation } from '../../types/damage/MissingHealthCalculation';
 import { AbilityStaticData } from '../../types/RawChampion/abilities/AbilityStaticData';
 import { Modifier } from '../../types/RawChampion/abilities/Modifier';
-import { AbilityAtributeIndicies } from './types/AbilityAtributeIndicies';
-import { AbilityDynamicData } from './types/AbilityDynamicData';
+import { AbilityAtributeIndicies } from '../../types/ability/AbilityAtributeIndicies';
+import { AbilityDynamicData } from '../../types/ability/AbilityDynamicData';
 import { getScaledValues } from './getScaledValues';
-import { ScaledValue } from './types/ScaledValue';
+import { ScaledValue } from '../../types/ability/ScaledValue';
 
 export class Ability {
   staticData: AbilityStaticData[];

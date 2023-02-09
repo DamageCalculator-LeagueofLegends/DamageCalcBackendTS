@@ -25,11 +25,11 @@ export function emptyWhiteList() {
 }
 
 const runServer = () => {
-  const PORT = 5050
+  const PORT = 5050;
 
   app.listen(PORT, () => {
     console.log(`listen on port ${PORT}`);
   });
-}
+};
 
-runServer()
+runServer();

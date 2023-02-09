@@ -1,4 +1,4 @@
-import { ChampionMissingHealthAmp } from '../../Champion/types/ChampionMissingHealthAmp';
+import { ChampionMissingHealthAmp } from '../champion/ChampionMissingHealthAmp';
 
 export class MissingHealthCalculation {
   enemyTotalHealth: number;

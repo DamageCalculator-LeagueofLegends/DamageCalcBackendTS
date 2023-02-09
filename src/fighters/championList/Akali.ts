@@ -1,11 +1,11 @@
-import { AllConditions as AC } from '../Ability/types/ActionConditions';
+import { AllConditions as AC } from '../../types/ability/ActionConditions';
 import {
   checkCondition,
   checkIfConditonExists,
 } from '../Ability/checkConditions';
 import { Champion } from '../Champion/Champion';
 import { Damage } from '../Damage/Damage';
-import { MissingHealthCalculation } from '../Damage/types/MissingHealthCalculation';
+import { MissingHealthCalculation } from '../../types/damage/MissingHealthCalculation';
 import { DamageType } from '../../types/RawChampion/abilities/staticDataEnums';
 import { RawChampion } from '../../types/RawChampion/RawChampion';
 

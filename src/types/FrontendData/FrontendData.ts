@@ -1,4 +1,5 @@
-import { ActionConditions } from '../../fighters/Ability/types/ActionConditions';
+import { ActionConditions } from '../ability/ActionConditions';
+import { AbilityLevel } from './AbilityLevel';
 
 export interface FrontendData {
   participants: (FrontendChampionDetails | FrontendDummyDetails)[];

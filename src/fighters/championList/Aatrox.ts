@@ -1,4 +1,4 @@
-import { AllConditions } from '../Ability/types/ActionConditions';
+import { AllConditions } from '../../types/ability/ActionConditions';
 import {
   checkCondition,
   checkIfConditonExists,

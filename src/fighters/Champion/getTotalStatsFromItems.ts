@@ -1,13 +1,13 @@
-import { Item } from '../../../items/Item/Item';
-import { UtilInfo } from '../types/UtilInfo';
+import { Item } from '../../items/Item';
+import { TotalStats } from '../../types/champion/TotalStats';
+import { UtilInfo } from '../../types/champion/UtilInfo';
 import {
   getNumberOfLegendaryItems,
   checkForMythicItemAndGetMythicItem,
   updateMultiplicativeStats,
 } from './helperFunctions';
-import { TotalStats } from './types/TotalStats';
-import { totalStatsFromItems } from './utilityFunctions/totalStatsFromItems';
-import { totalStatsFromMythic } from './utilityFunctions/totalStatsFromMythic';
+import { totalStatsFromItems } from './totalStatsFromItems';
+import { totalStatsFromMythic } from './totalStatsFromMythic';
 
 export function getTotalStatsFromItems(
   items: Item[],

@@ -1,5 +1,5 @@
 import { Modifier, Unit } from '../../types/RawChampion/abilities/Modifier';
-import { ScaledValue } from './types/ScaledValue';
+import { ScaledValue } from '../../types/ability/ScaledValue';
 
 export function getScaledValues(
   modifiers: Modifier[],

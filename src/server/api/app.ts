@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import { championRouter } from './champions.route';
-import { itemRouter } from './items.route';
-import { damageRouter } from './damage.route';
+import { championRouter } from '../routes/champions.route';
+import { itemRouter } from '../routes/items.route';
+import { damageRouter } from '../routes/damage.route';
 
 export const app = express();
 
@@ -19,5 +19,3 @@ app.use(championRouter);
 app.use(itemRouter);
 
 app.use(damageRouter);
-
-

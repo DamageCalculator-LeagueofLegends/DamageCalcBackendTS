@@ -1,4 +1,4 @@
-import { ScalingValuesForChampAbilities } from '../../Champion/types/ScalingValuesForChampAbilities';
+import { ScalingValuesForChampAbilities } from '../champion/ScalingValuesForChampAbilities';
 import { AbilityAtributeIndicies } from './AbilityAtributeIndicies';
 import { ActionConditions } from './ActionConditions';
 import { Bounds } from './Bounds';

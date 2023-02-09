@@ -1,4 +1,4 @@
-import { StatsInfo } from '../../../types/RawChampion/Stats';
+import { StatsInfo } from '../../types/RawChampion/Stats';
 
 export function getStatBasedOnLevel(stat: StatsInfo, level: number) {
   const base: number = stat.flat;

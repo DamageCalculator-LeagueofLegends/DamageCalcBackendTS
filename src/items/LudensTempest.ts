@@ -1,7 +1,7 @@
-import { Damage } from '../../fighters/Damage/Damage';
-import { Item } from '../Item/Item';
-import { DamageType } from '../../types/RawChampion/abilities/staticDataEnums';
-import { RawItem } from '../../types/RawItem/RawItem';
+import { Damage } from '../fighters/Damage/Damage';
+import { Item } from './Item';
+import { DamageType } from '../types/RawChampion/abilities/staticDataEnums';
+import { RawItem } from '../types/RawItem/RawItem';
 
 export class LudensTempest extends Item {
   constructor(rawItem: RawItem) {

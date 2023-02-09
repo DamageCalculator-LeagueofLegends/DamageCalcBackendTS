@@ -1,29 +1,26 @@
-import { Item } from '../../items/Item/Item';
+import { Item } from '../../items/Item';
 import { RawChampion, Url } from '../../types/RawChampion/RawChampion';
 import { Stats } from '../../types/RawChampion/Stats';
-import { BasedOnLevelStats } from './stats/types/BasedOnLevelStats';
-import { ChampionMissingHealthAmp } from './types/ChampionMissingHealthAmp';
-import { ScalingValuesForChampAbilities } from './types/ScalingValuesForChampAbilities';
-import { UtilInfo } from './types/UtilInfo';
-import { BonusStats } from './stats/types/BonusStats';
-import { TotalStats } from './stats/types/TotalStats';
-import { getBonusStatsFromItems } from './stats/getBonusStatsFromItems';
-import { getStatBasedOnLevel } from './stats/getStatBasedOnLevel';
-import { getTotalStatsBasedOnSpeicalItemEffects } from './stats/getTotalStatsBasedOnSpeicalItemEffects';
-import { getTotalStatsFromItems } from './stats/getTotalStatsFromItems';
-import { getTotalStatsFromLevelStatsAndBonusStats } from './stats/getTotalStatsFromLevelStatsAndBonusStats';
-import {
-  setAttackSpeed,
-  setAttackSpeedBasedOnLevel,
-} from './stats/helperFunctions';
-import { ChampionAbilities } from '../Ability/types/ChampionAbilities';
+import { BasedOnLevelStats } from '../../types/champion/BasedOnLevelStats';
+import { ChampionMissingHealthAmp } from '../../types/champion/ChampionMissingHealthAmp';
+import { ScalingValuesForChampAbilities } from '../../types/champion/ScalingValuesForChampAbilities';
+import { UtilInfo } from '../../types/champion/UtilInfo';
+import { BonusStats } from '../../types/champion/BonusStats';
+import { TotalStats } from '../../types/champion/TotalStats';
+import { getBonusStatsFromItems } from './getBonusStatsFromItems';
+import { getStatBasedOnLevel } from './getStatBasedOnLevel';
+import { getTotalStatsBasedOnSpeicalItemEffects } from './getTotalStatsBasedOnSpeicalItemEffects';
+import { getTotalStatsFromItems } from './getTotalStatsFromItems';
+import { getTotalStatsFromLevelStatsAndBonusStats } from './getTotalStatsFromLevelStatsAndBonusStats';
+import { setAttackSpeed, setAttackSpeedBasedOnLevel } from './helperFunctions';
+import { ChampionAbilities } from '../../types/ability/ChampionAbilities';
 import { Ability } from '../Ability/Ability';
-import { BoundsList } from '../Ability/types/Bounds';
-import { AbilityDynamicData } from '../Ability/types/AbilityDynamicData';
+import { BoundsList } from '../../types/ability/Bounds';
+import { AbilityDynamicData } from '../../types/ability/AbilityDynamicData';
 import { Damage } from '../Damage/Damage';
 import { DamageType } from '../../types/RawChampion/abilities/staticDataEnums';
 import { FighterUnit } from '../Fighter/Fighter';
-import { ActionConditions } from '../Ability/types/ActionConditions';
+import { ActionConditions } from '../../types/ability/ActionConditions';
 
 export class Champion extends FighterUnit {
   rawChampData: RawChampion;

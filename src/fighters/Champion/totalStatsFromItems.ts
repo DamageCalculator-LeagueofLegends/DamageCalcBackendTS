@@ -1,6 +1,6 @@
 import { Item } from '../../../../items/Item/Item';
 import { UtilInfo } from '../../types/UtilInfo';
-import { TotalStats } from '../types/TotalStats';
+import { TotalStats } from '../../types/TotalStats';
 import { multiplicativeCalc } from '../helperFunctions';
 
 export function totalStatsFromItems(

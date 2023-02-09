@@ -1,13 +1,12 @@
-import { AllConditions as AC } from '../../fighters/Ability/types/ActionConditions';
-import { Damage } from '../../fighters/Damage/Damage';
-import { Item } from '../Item/Item';
-import { ItemDynamicData } from '../Item/types/ItemDynamicData';
-import { DamageType } from '../../types/RawChampion/abilities/staticDataEnums';
-import { RawItem } from '../../types/RawItem/RawItem';
+import { AllConditions as AC } from '../types/ability/ActionConditions';
+import { Damage } from '../fighters/Damage/Damage';
+import { DamageType } from '../types/RawChampion/abilities/staticDataEnums';
+import { RawItem } from '../types/RawItem/RawItem';
 import {
   checkCondition,
   checkIfConditonExists,
-} from '../../fighters/Ability/checkConditions';
+} from '../fighters/Ability/checkConditions';
+import { Item } from './Item';
 
 export class LiandrysAnguish extends Item {
   constructor(rawItem: RawItem) {

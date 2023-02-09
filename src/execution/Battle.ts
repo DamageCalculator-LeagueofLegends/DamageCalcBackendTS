@@ -1,9 +1,9 @@
-import { OverallDamageData } from '../../types/FrontendData/FrontendData';
-import { Champion } from '../../fighters/Champion/Champion';
-import { Damage } from '../../fighters/Damage/Damage';
-import { Dummy } from '../../fighters/Dummy/Dummy';
-import { FighterStats, FighterUnit } from '../../fighters/Fighter/Fighter';
-import { AbilityNames } from '../../types/FrontendData/FrontendData';
+import { OverallDamageData } from '../types/FrontendData/FrontendData';
+import { Champion } from '../fighters/Champion/Champion';
+import { Damage } from '../fighters/Damage/Damage';
+import { Dummy } from '../fighters/Dummy/Dummy';
+import { FighterStats, FighterUnit } from '../fighters/Fighter/Fighter';
+import { AbilityNames } from '../types/FrontendData/FrontendData';
 
 export class Battle {
   participants: Record<string, Champion | Dummy>;

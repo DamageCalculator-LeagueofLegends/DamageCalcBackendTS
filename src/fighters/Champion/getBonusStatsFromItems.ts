@@ -1,9 +1,9 @@
-import { Item } from '../../../items/Item/Item';
+import { Item } from '../../items/Item';
 import {
   checkForMythicItemAndGetMythicItem,
   getNumberOfLegendaryItems,
 } from './helperFunctions';
-import { BonusStats } from './types/BonusStats';
+import { BonusStats } from '../../types/champion/BonusStats';
 
 export function getBonusStatsFromItems(
   items: Item[],

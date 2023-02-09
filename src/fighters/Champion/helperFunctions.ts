@@ -1,5 +1,5 @@
-import { Item } from '../../../items/Item/Item';
-import { TotalStats } from './types/TotalStats';
+import { Item } from '../../items/Item';
+import { TotalStats } from '../../types/champion/TotalStats';
 
 export function multiplicativeCalc(
   currentStat: number,

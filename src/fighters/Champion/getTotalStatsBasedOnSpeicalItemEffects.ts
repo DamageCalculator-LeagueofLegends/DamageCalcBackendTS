@@ -1,7 +1,7 @@
-import { Item } from '../../../items/Item/Item';
-import { BasedOnLevelStats } from './types/BasedOnLevelStats';
-import { BonusStats } from './types/BonusStats';
-import { TotalStats } from './types/TotalStats';
+import { Item } from '../../items/Item';
+import { BasedOnLevelStats } from '../../types/champion/BasedOnLevelStats';
+import { BonusStats } from '../../types/champion/BonusStats';
+import { TotalStats } from '../../types/champion/TotalStats';
 
 export function getTotalStatsBasedOnSpeicalItemEffects(
   items: Item[],

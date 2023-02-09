@@ -1,11 +1,11 @@
-import { ActionConditions } from '../../fighters/Ability/types/ActionConditions';
-import { ScalingValuesForChampAbilities } from '../../fighters/Champion/types/ScalingValuesForChampAbilities';
-import { Damage } from '../../fighters/Damage/Damage';
-import { Url } from '../../types/RawChampion/RawChampion';
-import { ItemStats } from '../../types/RawItem/ItemStats';
-import { Passive } from '../../types/RawItem/Passive';
-import { RawItem } from '../../types/RawItem/RawItem';
-import { ItemDynamicData } from './types/ItemDynamicData';
+import { ActionConditions } from '../types/ability/ActionConditions';
+import { ScalingValuesForChampAbilities } from '../types/champion/ScalingValuesForChampAbilities';
+import { Damage } from '../fighters/Damage/Damage';
+import { Url } from '../types/RawChampion/RawChampion';
+import { ItemStats } from '../types/RawItem/ItemStats';
+import { Passive } from '../types/RawItem/Passive';
+import { RawItem } from '../types/RawItem/RawItem';
+import { ItemDynamicData } from '../types/item/ItemDynamicData';
 
 export abstract class Item {
   itemID: number;

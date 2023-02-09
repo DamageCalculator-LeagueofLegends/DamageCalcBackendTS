@@ -1,6 +1,6 @@
-import { BasedOnLevelStats } from './types/BasedOnLevelStats';
-import { BonusStats } from './types/BonusStats';
-import { TotalStats } from './types/TotalStats';
+import { BasedOnLevelStats } from '../types/BasedOnLevelStats';
+import { BonusStats } from '../types/BonusStats';
+import { TotalStats } from '../types/TotalStats';
 
 export function getTotalStatsFromLevelStatsAndBonusStats(
   levelStats: BasedOnLevelStats | null,

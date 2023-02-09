@@ -1,17 +1,17 @@
-import { addToChampWhitelist } from '../..';
-import { OverallDamageData } from '../../types/FrontendData/FrontendData';
-import { Battle } from '../Battle/Battle';
-import { Champion } from '../../fighters/Champion/Champion';
-import { listOfChampions } from '../../fighters/championList';
-import { Dummy } from '../../fighters/Dummy/Dummy';
-import { FighterStats } from '../../fighters/Fighter/Fighter';
+import { addToChampWhitelist } from '..';
+import { OverallDamageData } from '../types/FrontendData/FrontendData';
+import { Battle } from './Battle';
+import { Champion } from '../fighters/Champion/Champion';
+import { listOfChampions } from '../fighters/championList';
+import { Dummy } from '../fighters/Dummy/Dummy';
+import { FighterStats } from '../fighters/Fighter/Fighter';
 import {
   AbilityNames,
   ActionAndConditions,
   FrontendData,
-} from '../../types/FrontendData/FrontendData';
-import { Item } from '../../items/Item/Item';
-import { listOfItems } from '../../items/itemList';
+} from '../types/FrontendData/FrontendData';
+import { Item } from '../items/Item';
+import { listOfItems } from '../items/itemList';
 
 export class Simulation {
   frontendInput: FrontendData;
