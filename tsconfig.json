@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2015"],
+    "lib": ["es2017"],
     "noImplicitAny": true,
     "alwaysStrict": true,
     "noImplicitOverride": true,
@@ -9,6 +9,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "removeComments": true,
+    "moduleResolution": "nodenext",
     "preserveConstEnums": true,
     "sourceMap": true,
     "strictNullChecks": true,
@@ -17,7 +18,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
-    "baseUrl": "/src",
-    "target": "es5"
+    "target": "ES2017"
   }
 }
