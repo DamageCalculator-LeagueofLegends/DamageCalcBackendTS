@@ -4,7 +4,7 @@ import { listOfItems } from '../../items/itemList';
 export const itemRouter = Router();
 itemRouter.use(json());
 
-itemRouter.get('api/items', async (req: Request, res: Response) => {
+itemRouter.get('/api/items', async (req: Request, res: Response) => {
   const items = await listOfItems;
-  res.send({ listOfItems: items });
+  res.status(200).send({ listOfItems: items });
 });

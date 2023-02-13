@@ -22,7 +22,7 @@ import { DamageType } from '../../types/RawChampion/abilities/staticDataEnums';
 import { FighterUnit } from '../Fighter/Fighter';
 import { ActionConditions } from '../../types/ability/ActionConditions';
 
-export class Champion extends FighterUnit {
+export abstract class Champion extends FighterUnit {
   rawChampData: RawChampion;
   champID: number;
   champName: string;

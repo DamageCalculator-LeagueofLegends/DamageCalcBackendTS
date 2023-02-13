@@ -1,4 +1,3 @@
-import { addToChampWhitelist } from '..';
 import { OverallDamageData } from '../types/FrontendData/FrontendData';
 import { Battle } from './Battle';
 import { Champion } from '../fighters/Champion/Champion';
@@ -12,6 +11,7 @@ import {
 } from '../types/FrontendData/FrontendData';
 import { Item } from '../items/Item';
 import { listOfItems } from '../items/itemList';
+import { addToChampWhitelist } from '../server/routes/champions.route';
 
 export class Simulation {
   frontendInput: FrontendData;

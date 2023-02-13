@@ -77,50 +77,50 @@ export const mock1: FrontendData = {
 
 //Seraphine
 export const mock2: FrontendData = {
-  participants: [
+  "participants": [
     {
-      type: 'CHAMPION',
-      championID: 147,
-      championLevel: 1,
-      listOfItemIDs: [6653, 6655],
-      listOfActions: [
+      "type": "CHAMPION",
+      "championID": 147,
+      "championLevel": 1,
+      "listOfItemIDs": [6653, 6655],
+      "listOfActions": [
         {
-          ability: 'AA',
-          conditions: null,
+          "ability": "AA",
+          "conditions": null,
         },
         {
-          ability: 'Q',
-          conditions: null,
+          "ability": "Q",
+          "conditions": null,
         },
         {
-          ability: 'AA',
-          conditions: null,
+          "ability": "AA",
+          "conditions": null,
         },
         {
-          ability: 'E',
-          conditions: null,
+          "ability": "E",
+          "conditions": null,
         },
         {
-          ability: 'E',
-          conditions: null,
+          "ability": "E",
+          "conditions": null,
         },
         {
-          ability: 'R',
-          conditions: null,
+          "ability": "R",
+          "conditions": null,
         },
       ],
-      abilityLevel: {
-        Q: 0,
-        W: 0,
-        E: 0,
-        R: 0,
+      "abilityLevel": {
+        "Q": 0,
+        "W": 0,
+        "E": 0,
+        "R": 0,
       },
     },
     {
-      type: 'DUMMY',
-      health: 1000,
-      armor: 0,
-      magicResistance: 0,
+      "type": "DUMMY",
+      "health": 1000,
+      "armor": 0,
+      "magicResistance": 0,
     },
   ],
 };
@@ -204,23 +204,23 @@ export const mock3: FrontendData = {
 
 //Ahri
 export const mock4: FrontendData = {
-  participants: [
+  "participants": [
     {
-      type: 'CHAMPION',
-      championID: 103,
-      championLevel: 1,
-      listOfItemIDs: [6653, 6655],
-      listOfActions: [
+      "type": "CHAMPION",
+      "championID": 103,
+      "championLevel": 1,
+      "listOfItemIDs": [6653, 6655],
+      "listOfActions": [
         {
-          ability: 'AA',
-          conditions: null,
+          "ability": "AA",
+          "conditions": null,
         },
         {
-          ability: 'Q',
-          conditions: {
-            conditions: [
-              { type: AllConditions.firstInstance, value: true },
-              { type: AllConditions.secondInstance, value: true },
+          "ability": 'Q',
+          "conditions": {
+            "conditions": [
+              { "type": AllConditions.firstInstance, value: true },
+              { "type": AllConditions.secondInstance, value: true },
             ],
           },
         },

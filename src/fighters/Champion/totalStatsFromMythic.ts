@@ -1,6 +1,7 @@
-import { Item } from '../../../../items/Item/Item';
-import { TotalStats } from '../../types/TotalStats';
-import { multiplicativeCalc } from '../helperFunctions';
+import { Item } from "../../items/Item";
+import { TotalStats } from "../../types/champion/TotalStats";
+import { multiplicativeCalc } from "./helperFunctions";
+
 
 export function totalStatsFromMythic(
   mythicItem: Item,

@@ -1,7 +1,8 @@
-import { Item } from '../../../../items/Item/Item';
-import { UtilInfo } from '../../types/UtilInfo';
-import { TotalStats } from '../../types/TotalStats';
-import { multiplicativeCalc } from '../helperFunctions';
+import { Item } from "../../items/Item";
+import { TotalStats } from "../../types/champion/TotalStats";
+import { UtilInfo } from "../../types/champion/UtilInfo";
+import { multiplicativeCalc } from "./helperFunctions";
+
 
 export function totalStatsFromItems(
   item: Item,
