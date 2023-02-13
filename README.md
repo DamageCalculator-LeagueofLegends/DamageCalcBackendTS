@@ -21,8 +21,12 @@ npm i
 <br>
 
 ```shell
-npm run build
-npm run start
+npm run execute
 ```
 
-Now that the server is running you can make REST API calls at the following route: http://loocalhost/get
+Everytime you change something in the code you will have to rerun npm run execute
+
+Now that the server is running you can make REST API calls at the following route:
+- http://loocalhost/api/champs -> gets a list of all avavaible **champions** in from of a JSON
+- http://loocalhost/api/items -> gets a list of all avaiable **items** in form of a JSON
+- http://loocalhost/api/damage -> requires a body based on the interface FrontendData and returns a JSON that contains the damage dealt
